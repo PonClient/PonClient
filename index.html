@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="PornClient — современный Minecraft-клиент с приятным интерфейсом и мощным набором функций.">
+
+    <title>PornClient — Best Cheat Client</title>
+
+    <style>
+
+        :root {
+            --black: #070707;
+            --black-2: #0d0d0d;
+            --card: #111111;
+            --card-hover: #171717;
+
+            --orange: #ff7a00;
+            --orange-light: #ff9d3d;
+            --orange-dark: #c95600;
+
+            --white: #ffffff;
+            --gray: #999999;
+            --border: #252525;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 80% 0%,
+                    rgba(255, 122, 0, 0.14),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 10% 30%,
+                    rgba(255, 122, 0, 0.06),
+                    transparent 30%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           НАВИГАЦИЯ
+        ========================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(7, 7, 7, 0.82);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--orange);
+
+            text-shadow:
+                0 0 20px rgba(255, 122, 0, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            color: var(--gray);
+
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-download {
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            background: var(--orange);
+
+            color: #000 !important;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 0 25px rgba(255, 122, 0, 0.25);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height:
+                calc(100vh - 72px);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                100px 7%;
+        }
+
+        .hero-content {
+            max-width: 1050px;
+
+            width: 100%;
+
+            text-align: center;
+        }
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                8px 14px;
+
+            border:
+                1px solid
+                rgba(255,122,0,0.25);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,122,0,0.05);
+
+            color: #d6d6d6;
+
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--orange);
+
+            box-shadow:
+                0 0 12px var(--orange);
+        }
+
+        .hero h1 {
+            margin-top: 30px;
+
+            font-size:
+                clamp(55px, 10vw, 115px);
+
+            line-height: 0.9;
+
+            letter-spacing: -7px;
+
+            font-weight: 950;
+        }
+
+        .orange-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    var(--orange-light),
+                    var(--orange)
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 680px;
+
+            margin:
+                30px auto 0;
+
+            color: var(--gray);
+
+            font-size: 18px;
+
+            line-height: 1.7;
+        }
+
+        .buttons {
+            margin-top: 35px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+            min-height: 49px;
+
+            padding:
+                0 22px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                var(--card);
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            transition:
+                0.2s;
+        }
+
+        .button:hover {
+            transform:
+                translateY(-3px);
+
+            border-color:
+                var(--orange);
+
+            background:
+                var(--card-hover);
+        }
+
+        .button-primary {
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    var(--orange-dark)
+                );
+
+            color: #000;
+
+            box-shadow:
+                0 8px 35px
+                rgba(255,122,0,0.22);
+        }
+
+        .button-primary:hover {
+            color: #000;
+
+            box-shadow:
+                0 10px 45px
+                rgba(255,122,0,0.38);
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .section {
+            padding:
+                100px 7%;
+        }
+
+        .container {
+            max-width: 1100px;
+
+            width: 100%;
+
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 42px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .section-subtitle {
+            margin-top: 10px;
+
+            color: var(--gray);
+
+            line-height: 1.6;
+        }
+
+        .features {
+            margin-top: 35px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 17px;
+        }
+
+        .feature {
+            min-height: 230px;
+
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #141414,
+                    #0d0d0d
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 18px;
+
+            transition:
+                0.25s;
+        }
+
+        .feature:hover {
+            transform:
+                translateY(-6px);
+
+            border-color:
+                rgba(255,122,0,0.55);
+
+            box-shadow:
+                0 15px 45px
+                rgba(0,0,0,0.35);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,122,0,0.08);
+
+            border:
+                1px solid
+                rgba(255,122,0,0.22);
+
+            color:
+                var(--orange);
+
+            font-size: 22px;
+
+            box-shadow:
+                inset 0 0 20px
+                rgba(255,122,0,0.04);
+        }
+
+        .feature h3 {
+            margin-top: 22px;
+
+            font-size: 20px;
+        }
+
+        .feature p {
+            margin-top: 10px;
+
+            color: var(--gray);
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           БЛОК CLIENT
+        ========================= */
+
+        .client-box {
+            margin-top: 20px;
+
+            padding: 45px;
+
+            border-radius: 22px;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255,122,0,0.12),
+                    transparent 40%
+                ),
+                #101010;
+
+            border:
+                1px solid
+                var(--border);
+        }
+
+        .client-box h2 {
+            font-size: 36px;
+        }
+
+        .client-box p {
+            max-width: 720px;
+
+            margin-top: 15px;
+
+            color: var(--gray);
+
+            line-height: 1.8;
+        }
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin-top: 25px;
+        }
+
+        .tag {
+            padding:
+                8px 12px;
+
+            border-radius: 8px;
+
+            background:
+                #181818;
+
+            border:
+                1px solid
+                #292929;
+
+            color:
+                #cfcfcf;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size:
+                clamp(35px, 6vw, 58px);
+
+            letter-spacing: -2px;
+        }
+
+        .cta p {
+            max-width: 600px;
+
+            margin:
+                15px auto 0;
+
+            color:
+                var(--gray);
+
+            line-height: 1.7;
+        }
+
+        .cta .button {
+            margin-top: 28px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding:
+                35px 7%;
+
+            border-top:
+                1px solid
+                #202020;
+
+            text-align: center;
+
+            color:
+                #666;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding:
+                    0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding:
+                    75px 20px;
+            }
+
+            .hero h1 {
+                letter-spacing:
+                    -4px;
+            }
+
+            .hero-description {
+                font-size:
+                    16px;
+            }
+
+            .section {
+                padding:
+                    70px 20px;
+            }
+
+            .features {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .client-box {
+                padding:
+                    30px;
+            }
+
+            .client-box h2 {
+                font-size:
+                    30px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- НАВИГАЦИЯ -->
+
+<header class="navbar">
+
+    <a href="#" class="logo">
+        Porn<span>Client</span>
+    </a>
+
+    <nav class="nav-links">
+
+        <a href="#features">
+            Возможности
+        </a>
+
+        <a href="#client">
+            Клиент
+        </a>
+
+        <a href="#about">
+            О проекте
+        </a>
+
+        <a
+            href="#download"
+            class="nav-download"
+        >
+            Скачать
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Клиент активно развивается
+
+        </div>
+
+
+        <h1>
+
+            Best
+
+            <br>
+
+            <span class="orange-text">
+                Cheat Client
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Современный Minecraft-клиент
+            с приятным интерфейсом,
+            мощным функционалом
+            и вниманием к каждой детали.
+
+        </p>
+
+
+        <div class="buttons">
+
+            <a
+                href="#features"
+                class="button button-primary"
+            >
+                Посмотреть возможности
+            </a>
+
+            <a
+                href="#client"
+                class="button"
+            >
+                Узнать больше
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section
+    class="section"
+    id="features"
+>
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Возможности
+        </h2>
+
+        <p class="section-subtitle">
+            Всё необходимое для удобной игры
+            собрано в одном клиенте.
+        </p>
+
+
+        <div class="features">
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Производительность
+                </h3>
+
+                <p>
+                    Оптимизированная архитектура
+                    и плавная работа интерфейса
+                    без лишних элементов.
+                </p>
+
+            </article>
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    ◈
+                </div>
+
+                <h3>
+                    Приятный интерфейс
+                </h3>
+
+                <p>
+                    Удобное меню, понятная навигация
+                    и аккуратный дизайн,
+                    которым приятно пользоваться.
+                </p>
+
+            </article>
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    Большой функционал
+                </h3>
+
+                <p>
+                    Гибкие настройки и расширяемая
+                    система функций для разных
+                    сценариев использования.
+                </p>
+
+            </article>
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    🛡
+                </div>
+
+                <h3>
+                    Совместимость
+                </h3>
+
+                <p>
+                    Поддержка популярных конфигураций
+                    Minecraft и возможность адаптации
+                    клиента под разные окружения.
+                </p>
+
+            </article>
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    ⚙
+                </div>
+
+                <h3>
+                    Гибкие настройки
+                </h3>
+
+                <p>
+                    Настраивай внешний вид,
+                    функции и поведение клиента
+                    под себя.
+                </p>
+
+            </article>
+
+
+            <article class="feature">
+
+                <div class="feature-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Постоянные обновления
+                </h3>
+
+                <p>
+                    Проект можно регулярно обновлять,
+                    добавляя новые возможности
+                    и улучшения.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CLIENT -->
+
+<section
+    class="section"
+    id="client"
+>
+
+    <div class="container">
+
+        <div class="client-box">
+
+            <h2>
+                Один клиент — много возможностей
+            </h2>
+
+            <p>
+                PornClient создаётся с упором
+                на удобство, современный внешний вид
+                и большое количество настраиваемых функций.
+            </p>
+
+
+            <div class="tags">
+
+                <span class="tag">
+                    Современный UI
+                </span>
+
+                <span class="tag">
+                    Быстрая настройка
+                </span>
+
+                <span class="tag">
+                    Гибкие функции
+                </span>
+
+                <span class="tag">
+                    Minecraft
+                </span>
+
+                <span class="tag">
+                    Тёмная тема
+                </span>
+
+                <span class="tag">
+                    Оранжевый стиль
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section
+    class="section"
+    id="about"
+>
+
+    <div class="container">
+
+        <div class="client-box">
+
+            <h2>
+                О проекте
+            </h2>
+
+            <p>
+                Это первая версия сайта PornClient.
+                Дальше здесь можно добавить страницу
+                загрузки, версии клиента, список изменений,
+                документацию, FAQ и личный кабинет.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section
+    class="section cta"
+    id="download"
+>
+
+    <div class="container">
+
+        <h2>
+            Готов попробовать?
+        </h2>
+
+        <p>
+            Следующим этапом можно сделать
+            полноценную страницу загрузки клиента
+            с выбором версии Minecraft.
+        </p>
+
+        <a
+            href="#"
+            class="button button-primary"
+        >
+            Скачать клиент
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    © 2026 PornClient · Независимый проект
+
+</footer>
+
+
+</body>
+</html>
