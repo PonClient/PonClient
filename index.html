@@ -10,10 +10,6 @@
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -67,15 +63,12 @@ a {
 
 
 /* =========================================================
-   SMOOTH CURSOR
+   CURSOR
 ========================================================= */
 
 * {
     cursor: none;
 }
-
-
-/* Центральная точка */
 
 .cursor-dot {
     position: fixed;
@@ -97,11 +90,8 @@ a {
     box-shadow:
         0 0 8px #ff7a00,
         0 0 20px #ff7a00,
-        0 0 40px rgba(255,122,0,.7);
+        0 0 35px rgba(255,122,0,.7);
 }
-
-
-/* Контейнер SVG-хвоста */
 
 .cursor-trail {
     position: fixed;
@@ -127,9 +117,6 @@ a {
     overflow: visible;
 }
 
-
-/* Основная толстая линия */
-
 .cursor-trail-path {
     fill: none;
 
@@ -145,12 +132,9 @@ a {
 
     filter:
         drop-shadow(0 0 4px #ff7a00)
-        drop-shadow(0 0 10px rgba(255,122,0,.8))
-        drop-shadow(0 0 22px rgba(255,122,0,.45));
+        drop-shadow(0 0 9px rgba(255,122,0,.8))
+        drop-shadow(0 0 18px rgba(255,122,0,.4));
 }
-
-
-/* Яркая сердцевина */
 
 .cursor-trail-glow {
     fill: none;
@@ -166,8 +150,8 @@ a {
     opacity: .95;
 
     filter:
-        drop-shadow(0 0 5px #ff7a00)
-        drop-shadow(0 0 10px #ff7a00);
+        drop-shadow(0 0 4px #ff7a00)
+        drop-shadow(0 0 8px #ff7a00);
 }
 
 
@@ -238,8 +222,7 @@ a {
 
     font-weight: 950;
 
-    letter-spacing:
-        -14px;
+    letter-spacing: -14px;
 
     opacity: 0;
 
@@ -264,29 +247,19 @@ a {
 
     0% {
         opacity: 0;
-
-        transform:
-            scale(.6);
-
-        filter:
-            blur(12px);
+        transform: scale(.6);
+        filter: blur(12px);
     }
 
     60% {
         opacity: 1;
-
-        transform:
-            scale(1.08);
-
-        filter:
-            blur(0);
+        transform: scale(1.08);
+        filter: blur(0);
     }
 
     100% {
         opacity: 1;
-
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 }
 
@@ -294,19 +267,13 @@ a {
 
     0% {
         opacity: 1;
-
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 
     100% {
         opacity: 0;
-
-        transform:
-            scale(1.25);
-
-        filter:
-            blur(8px);
+        transform: scale(1.25);
+        filter: blur(8px);
     }
 }
 
@@ -314,9 +281,7 @@ a {
 
     0% {
         opacity: 0;
-
-        transform:
-            scale(.5);
+        transform: scale(.5);
     }
 
     40% {
@@ -325,9 +290,7 @@ a {
 
     100% {
         opacity: 0;
-
-        transform:
-            scale(1.4);
+        transform: scale(1.4);
     }
 }
 
@@ -1299,7 +1262,6 @@ a {
     id="cursorDot"
 ></div>
 
-
 <div
     class="cursor-trail"
     id="cursorTrail"
@@ -1394,7 +1356,6 @@ a {
 <section class="hero">
 
     <div class="hero-content">
-
 
         <div class="status-badge">
 
@@ -1511,11 +1472,8 @@ a {
 
 <div class="container">
 
-
     <h2 class="section-title">
-
         Возможности клиента
-
     </h2>
 
 
@@ -1641,8 +1599,6 @@ a {
     </div>
 
 
-    <!-- ТОЛЬКО ТЕКУЩАЯ ВЕРСИЯ -->
-
     <div class="stats">
 
         <div class="stat">
@@ -1658,7 +1614,6 @@ a {
         </div>
 
     </div>
-
 
 </div>
 
@@ -1677,7 +1632,6 @@ a {
 <div class="container">
 
     <div class="download-box">
-
 
         <h2>
 
@@ -1713,7 +1667,6 @@ a {
 
         </a>
 
-
     </div>
 
 </div>
@@ -1732,16 +1685,13 @@ a {
 
 <div class="container">
 
-
     <h2 class="section-title">
         Обновления
     </h2>
 
 
     <p class="section-description">
-
         Последние изменения клиента.
-
     </p>
 
 
@@ -1832,9 +1782,7 @@ a {
 
 <div class="container">
 
-
     <div class="discord">
-
 
         <div class="discord-icon">
             💬
@@ -1876,7 +1824,6 @@ a {
 
         </a>
 
-
     </div>
 
 </div>
@@ -1894,7 +1841,6 @@ a {
 >
 
 <div class="container">
-
 
     <h2 class="section-title">
         FAQ
@@ -1916,10 +1862,8 @@ a {
             </summary>
 
             <p>
-
                 На данный момент клиент рассчитан
                 на Minecraft 1.21.1.
-
             </p>
 
         </details>
@@ -1932,10 +1876,8 @@ a {
             </summary>
 
             <p>
-
                 Перейди в раздел скачивания
                 и нажми кнопку загрузки.
-
             </p>
 
         </details>
@@ -1948,11 +1890,9 @@ a {
             </summary>
 
             <p>
-
                 Некоторые функции клиента
                 могут требовать авторизации
                 через личный кабинет.
-
             </p>
 
         </details>
@@ -1965,11 +1905,9 @@ a {
             </summary>
 
             <p>
-
                 Все основные изменения
                 публикуются в разделе обновлений
                 и в сообществе проекта.
-
             </p>
 
         </details>
@@ -1998,10 +1936,6 @@ a {
 
 </footer>
 
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
 
 <script>
 
@@ -2125,7 +2059,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   SMOOTH CURVED NEON CURSOR
+   SHORT SMOOTH NEON CURSOR
 ========================================================= */
 
 const cursorDot =
@@ -2152,15 +2086,15 @@ let mouseY =
 
 
 /*
-   История движения.
+   Было 22.
 
-   Чем больше точек,
-   тем длиннее хвост.
+   Теперь всего 10 точек,
+   поэтому хвост намного короче.
 */
 
-const points = [];
+const POINT_COUNT = 10;
 
-const POINT_COUNT = 22;
+const points = [];
 
 
 for (
@@ -2180,7 +2114,9 @@ for (
 }
 
 
-/* Движение мыши */
+/* =========================================================
+   MOUSE
+========================================================= */
 
 document.addEventListener(
     "mousemove",
@@ -2193,11 +2129,6 @@ document.addEventListener(
             event.clientY;
 
 
-        /*
-           Центральная точка
-           находится прямо на курсоре.
-        */
-
         cursorDot.style.left =
             mouseX + "px";
 
@@ -2209,29 +2140,29 @@ document.addEventListener(
 
 
 /* =========================================================
-   UPDATE TRAIL
+   TRAIL UPDATE
 ========================================================= */
 
 function updateTrail() {
 
 
     /*
-       Первая точка хвоста
-       быстро догоняет мышь.
+       Первая часть хвоста
+       быстро догоняет курсор.
     */
 
     points[0].x +=
         (mouseX - points[0].x)
-        * 0.30;
+        * 0.42;
 
     points[0].y +=
         (mouseY - points[0].y)
-        * 0.30;
+        * 0.42;
 
 
     /*
-       Остальные точки
-       плавно следуют друг за другом.
+       Остальные части
+       быстро следуют друг за другом.
     */
 
     for (
@@ -2247,10 +2178,15 @@ function updateTrail() {
             points[i];
 
 
+        /*
+           Чем дальше точка,
+           тем чуть медленнее она следует.
+        */
+
         const speed =
             Math.max(
-                0.075,
-                0.20 - i * 0.006
+                0.13,
+                0.27 - i * 0.01
             );
 
 
@@ -2291,8 +2227,7 @@ function drawTrail() {
 
 
     /*
-       Создаём плавную кривую
-       через середины точек.
+       Плавные изгибы.
     */
 
     for (
@@ -2324,10 +2259,6 @@ function drawTrail() {
 
     }
 
-
-    /*
-       Последняя часть хвоста.
-    */
 
     const last =
         points[points.length - 1];
