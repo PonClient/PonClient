@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PornClient — Один клиент, много возможностей</title>
+<title>PornClient — Minecraft Client</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -22,22 +26,53 @@ html {
 
 body {
     min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     color: #fff;
 
     background:
         radial-gradient(
             circle at 80% 0%,
-            rgba(255, 122, 0, .16),
+            rgba(255,122,0,.16),
             transparent 35%
+        ),
+        radial-gradient(
+            circle at 10% 30%,
+            rgba(255,122,0,.05),
+            transparent 30%
         ),
         #070707;
 }
 
 
-/* =====================================================
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(1120px, calc(100% - 40px));
+    margin: auto;
+}
+
+.orange {
+    color: #ff7a00;
+
+    text-shadow:
+        0 0 25px rgba(255,122,0,.35);
+}
+
+
+/* =========================================================
    LOADING SCREEN
-===================================================== */
+========================================================= */
 
 .loading-screen {
     position: fixed;
@@ -49,13 +84,11 @@ body {
     align-items: center;
     justify-content: center;
 
-    overflow: hidden;
-
     background: #050505;
 
     transition:
-        opacity .45s ease,
-        visibility .45s ease;
+        opacity .5s ease,
+        visibility .5s ease;
 }
 
 .loading-screen.hide {
@@ -64,44 +97,36 @@ body {
     pointer-events: none;
 }
 
-
-/* Свечение за логотипом */
-
 .loading-screen::before {
     content: "";
 
     position: absolute;
 
-    width: 350px;
-    height: 350px;
+    width: 400px;
+    height: 400px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255, 122, 0, .18),
+            rgba(255,122,0,.18),
             transparent 70%
         );
 
-    filter: blur(30px);
+    filter: blur(35px);
 
-    animation: loadingGlow 1.5s ease-in-out forwards;
+    animation:
+        loadingGlow 1.5s ease forwards;
 }
-
-
-/* PC */
 
 .loading-logo {
     position: relative;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
 
     font-family:
-        "Arial Black",
-        "Montserrat",
+        Arial Black,
         Arial,
         sans-serif;
 
@@ -110,108 +135,61 @@ body {
 
     font-weight: 950;
 
-    line-height: 1;
-
     letter-spacing: -14px;
-
-    transform: scale(.55);
 
     opacity: 0;
 
-    color: #fff;
+    transform: scale(.6);
 
     text-shadow:
-        0 0 10px rgba(255, 122, 0, .9),
-        0 0 30px rgba(255, 122, 0, .7),
-        0 0 70px rgba(255, 122, 0, .5),
-        0 0 120px rgba(255, 122, 0, .3);
+        0 0 15px rgba(255,122,0,.9),
+        0 0 40px rgba(255,122,0,.7),
+        0 0 90px rgba(255,122,0,.45);
 
     animation:
-        pcLogoIn .65s cubic-bezier(.16, 1, .3, 1) .1s forwards,
-        pcLogoOut .55s cubic-bezier(.7, 0, .84, 0) 1s forwards;
-}
-
-.loading-logo span:first-child {
-    color: #fff;
+        logoIn .7s cubic-bezier(.16,1,.3,1) forwards,
+        logoOut .5s ease 1s forwards;
 }
 
 .loading-logo span:last-child {
     color: #ff7a00;
 }
 
-
-/* Появление PC */
-
-@keyframes pcLogoIn {
+@keyframes logoIn {
 
     0% {
         opacity: 0;
-
-        transform:
-            scale(.55);
-
-        filter:
-            blur(15px);
+        transform: scale(.6);
+        filter: blur(12px);
     }
 
-    55% {
+    60% {
         opacity: 1;
-
-        transform:
-            scale(1.08);
-
-        filter:
-            blur(0);
+        transform: scale(1.08);
+        filter: blur(0);
     }
 
     100% {
         opacity: 1;
-
-        transform:
-            scale(1);
-
-        filter:
-            blur(0);
+        transform: scale(1);
     }
+
 }
 
-
-/* Исчезновение */
-
-@keyframes pcLogoOut {
+@keyframes logoOut {
 
     0% {
         opacity: 1;
-
-        transform:
-            scale(1);
-    }
-
-    45% {
-        opacity: 1;
-
-        transform:
-            scale(1.08);
-
-        text-shadow:
-            0 0 20px rgba(255, 122, 0, 1),
-            0 0 60px rgba(255, 122, 0, .9),
-            0 0 120px rgba(255, 122, 0, .5);
+        transform: scale(1);
     }
 
     100% {
         opacity: 0;
-
-        transform:
-            scale(1.25);
-
-        filter:
-            blur(8px);
+        transform: scale(1.25);
+        filter: blur(8px);
     }
+
 }
-
-
-/* Анимация свечения */
 
 @keyframes loadingGlow {
 
@@ -222,23 +200,24 @@ body {
 
     40% {
         opacity: 1;
-        transform: scale(1);
     }
 
     100% {
         opacity: 0;
-        transform: scale(1.35);
+        transform: scale(1.4);
     }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    NAVBAR
-===================================================== */
+========================================================= */
 
 .navbar {
     position: sticky;
     top: 0;
+
     z-index: 1000;
 
     height: 72px;
@@ -249,23 +228,24 @@ body {
 
     padding: 0 7%;
 
-    background: rgba(7,7,7,.86);
+    background:
+        rgba(7,7,7,.82);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
 
-    border-bottom: 1px solid #202020;
+    border-bottom:
+        1px solid #202020;
 }
 
 .logo {
-    color: #fff;
-
     text-decoration: none;
 
     font-size: 23px;
 
     font-weight: 900;
 
-    letter-spacing: -.5px;
+    letter-spacing: -.7px;
 }
 
 .logo span {
@@ -276,10 +256,29 @@ body {
         rgba(255,122,0,.5);
 }
 
+.nav-links {
+    display: flex;
 
-/* =====================================================
-   ACCOUNT BUTTON
-===================================================== */
+    align-items: center;
+
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #777;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
 
 .account-button {
     display: inline-flex;
@@ -287,7 +286,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 10px 18px;
+    padding: 10px 17px;
 
     border-radius: 10px;
 
@@ -305,7 +304,8 @@ body {
 .account-button:hover {
     background: #ff9635;
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 
     box-shadow:
         0 8px 25px
@@ -313,9 +313,9 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .hero {
     position: relative;
@@ -327,13 +327,10 @@ body {
 
     align-items: center;
 
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 90px 20px;
-
     overflow: hidden;
+
+    padding:
+        100px 20px;
 }
 
 .hero::before {
@@ -341,20 +338,19 @@ body {
 
     position: absolute;
 
-    width: 550px;
-    height: 550px;
+    width: 650px;
+    height: 650px;
+
+    right: -300px;
+    top: -200px;
 
     border-radius: 50%;
 
     background:
-        rgba(255,122,0,.07);
+        rgba(255,122,0,.09);
 
-    filter: blur(100px);
-
-    top: 0;
-    right: -200px;
-
-    pointer-events: none;
+    filter:
+        blur(110px);
 }
 
 .hero::after {
@@ -362,20 +358,19 @@ body {
 
     position: absolute;
 
-    width: 450px;
-    height: 450px;
+    width: 400px;
+    height: 400px;
+
+    left: -250px;
+    bottom: -200px;
 
     border-radius: 50%;
 
     background:
-        rgba(255,122,0,.04);
+        rgba(255,122,0,.05);
 
-    filter: blur(100px);
-
-    bottom: -200px;
-    left: -150px;
-
-    pointer-events: none;
+    filter:
+        blur(100px);
 }
 
 .hero-content {
@@ -383,7 +378,11 @@ body {
 
     z-index: 2;
 
-    max-width: 900px;
+    width: min(1000px, 100%);
+
+    margin: auto;
+
+    text-align: center;
 }
 
 .status-badge {
@@ -391,9 +390,10 @@ body {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 9px;
 
-    padding: 8px 14px;
+    padding:
+        8px 14px;
 
     margin-bottom: 25px;
 
@@ -401,16 +401,20 @@ body {
         1px solid
         rgba(255,122,0,.25);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     background:
         rgba(255,122,0,.07);
 
-    color: #ff9635;
+    color:
+        #ff9635;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 700;
+    font-weight:
+        800;
 }
 
 .status-dot {
@@ -419,183 +423,267 @@ body {
 
     border-radius: 50%;
 
-    background: #ff7a00;
+    background:
+        #ff7a00;
 
     box-shadow:
-        0 0 10px
+        0 0 12px
         #ff7a00;
+
+    animation:
+        pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .4;
+    }
+
 }
 
 .hero h1 {
     font-size:
-        clamp(55px, 10vw, 105px);
+        clamp(60px, 11vw, 125px);
 
-    line-height: .95;
+    line-height: .9;
 
-    letter-spacing: -6px;
+    letter-spacing:
+        -8px;
 
-    font-weight: 950;
+    font-weight:
+        950;
 }
 
-.hero h1 span {
-    color: #ff7a00;
-
-    text-shadow:
-        0 0 35px
-        rgba(255,122,0,.35);
-}
-
-.hero-title {
+.hero-subtitle {
     margin-top: 25px;
 
     font-size:
-        clamp(27px, 4vw, 43px);
+        clamp(25px, 4vw, 43px);
 
-    color: #eee;
+    font-weight:
+        800;
 
-    letter-spacing: -1px;
+    letter-spacing:
+        -2px;
+
+    color:
+        #eee;
 }
 
 .hero-description {
-    max-width: 720px;
+    max-width:
+        680px;
 
     margin:
-        22px auto 0;
+        20px auto 0;
 
-    color: #888;
+    color:
+        #777;
 
-    font-size: 17px;
+    font-size:
+        17px;
 
-    line-height: 1.7;
+    line-height:
+        1.7;
 }
 
-
-/* =====================================================
-   HERO BUTTONS
-===================================================== */
-
-.buttons {
+.hero-buttons {
     display: flex;
 
-    align-items: center;
-
-    justify-content: center;
+    justify-content:
+        center;
 
     gap: 12px;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
-    margin-top: 35px;
+    margin-top:
+        35px;
 }
 
-.primary-button,
-.secondary-button {
+.button {
     display: inline-flex;
 
     align-items: center;
 
     justify-content: center;
 
-    min-width: 170px;
+    min-width:
+        175px;
 
-    padding: 14px 24px;
+    padding:
+        14px 24px;
 
-    border-radius: 11px;
+    border-radius:
+        11px;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    transition: .2s;
+    transition:
+        .2s;
 }
 
 .primary-button {
-    background: #ff7a00;
+    background:
+        #ff7a00;
 
-    color: #080808;
+    color:
+        #080808;
 }
 
 .primary-button:hover {
-    background: #ff9635;
+    background:
+        #ff9635;
 
     transform:
-        translateY(-2px);
+        translateY(-3px);
 
     box-shadow:
-        0 10px 30px
-        rgba(255,122,0,.2);
+        0 12px 35px
+        rgba(255,122,0,.25);
 }
 
 .secondary-button {
-    background: #111;
+    background:
+        #111;
 
     border:
         1px solid #292929;
 
-    color: #ddd;
+    color:
+        #ddd;
 }
 
 .secondary-button:hover {
-    border-color: #ff7a00;
+    border-color:
+        #ff7a00;
 
-    color: #ff7a00;
+    color:
+        #ff7a00;
 
     transform:
-        translateY(-2px);
+        translateY(-3px);
 }
 
 
-/* =====================================================
-   FEATURES SECTION
-===================================================== */
+/* =========================================================
+   CLIENT INFO
+========================================================= */
+
+.client-info {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top:
+        45px;
+}
+
+.info-item {
+    padding:
+        10px 16px;
+
+    border:
+        1px solid #242424;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color:
+        #777;
+
+    font-size:
+        13px;
+}
+
+.info-item strong {
+    color:
+        #ddd;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
 
 .section {
-    max-width: 1100px;
-
-    margin: auto;
-
-    padding: 100px 20px;
+    padding:
+        100px 0;
 }
 
-.section-header {
-    text-align: center;
+.section-title {
+    text-align:
+        center;
 
-    margin-bottom: 50px;
-}
-
-.section-header h2 {
     font-size:
-        clamp(34px, 5vw, 54px);
+        clamp(35px, 5vw, 55px);
 
-    letter-spacing: -2px;
+    letter-spacing:
+        -3px;
 }
 
-.section-header p {
-    margin-top: 12px;
+.section-description {
+    margin:
+        12px auto 50px;
 
-    color: #777;
+    max-width:
+        600px;
 
-    font-size: 16px;
+    text-align:
+        center;
+
+    color:
+        #777;
+
+    line-height:
+        1.7;
 }
 
 
-/* =====================================================
-   FEATURE GRID
-===================================================== */
+/* =========================================================
+   MODULES
+========================================================= */
 
-.features {
-    display: grid;
+.modules {
+    display:
+        grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 18px;
+    gap:
+        16px;
 }
 
-.feature {
-    padding: 30px;
+.module {
+    position:
+        relative;
 
-    min-height: 210px;
+    padding:
+        28px;
+
+    min-height:
+        190px;
+
+    overflow:
+        hidden;
 
     background:
         linear-gradient(
@@ -607,378 +695,593 @@ body {
     border:
         1px solid #252525;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 
-    transition: .25s;
+    transition:
+        .25s;
 }
 
-.feature:hover {
-    transform:
-        translateY(-5px);
+.module::after {
+    content:
+        "";
 
-    border-color:
-        rgba(255,122,0,.5);
+    position:
+        absolute;
 
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.25);
-}
+    width:
+        120px;
 
-.feature-icon {
-    width: 46px;
-    height: 46px;
+    height:
+        120px;
 
-    display: flex;
+    right:
+        -60px;
 
-    align-items: center;
+    bottom:
+        -60px;
 
-    justify-content: center;
-
-    margin-bottom: 20px;
-
-    border-radius: 12px;
-
-    background:
-        rgba(255,122,0,.1);
-
-    color:
-        #ff7a00;
-
-    font-size: 22px;
-}
-
-.feature h3 {
-    font-size: 20px;
-}
-
-.feature p {
-    margin-top: 10px;
-
-    color: #777;
-
-    line-height: 1.6;
-}
-
-
-/* =====================================================
-   CLIENT BLOCK
-===================================================== */
-
-.client-block {
-    max-width: 1000px;
-
-    margin: 0 auto;
-
-    padding: 55px 35px;
-
-    text-align: center;
-
-    border:
-        1px solid #252525;
-
-    border-radius: 22px;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(255,122,0,.13),
-            transparent 45%
-        ),
-        #101010;
-}
-
-.client-block h2 {
-    font-size:
-        clamp(30px, 5vw, 48px);
-
-    letter-spacing: -2px;
-}
-
-.client-block h2 span {
-    color: #ff7a00;
-}
-
-.client-block p {
-    max-width: 650px;
-
-    margin:
-        15px auto 0;
-
-    color: #888;
-
-    line-height: 1.7;
-}
-
-.download-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-top: 28px;
-
-    padding: 14px 25px;
-
-    border-radius: 11px;
-
-    background: #ff7a00;
-
-    color: #080808;
-
-    text-decoration: none;
-
-    font-weight: 800;
-
-    transition: .2s;
-}
-
-.download-button:hover {
-    background: #ff9635;
-
-    transform:
-        translateY(-2px);
-}
-
-
-/* =====================================================
-   DEVELOPMENT
-===================================================== */
-
-.development {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    padding: 35px;
-
-    border:
-        1px solid #252525;
-
-    border-radius: 20px;
-
-    background: #101010;
-}
-
-.development-text h2 {
-    font-size: 28px;
-}
-
-.development-text p {
-    margin-top: 10px;
-
-    color: #777;
-
-    line-height: 1.6;
-}
-
-.development-badge {
-    flex-shrink: 0;
-
-    padding: 10px 16px;
-
-    border-radius: 999px;
+    border-radius:
+        50%;
 
     background:
         rgba(255,122,0,.08);
 
-    border:
-        1px solid
-        rgba(255,122,0,.25);
+    filter:
+        blur(20px);
+}
 
-    color: #ff9635;
+.module:hover {
+    transform:
+        translateY(-6px);
 
-    font-size: 13px;
+    border-color:
+        rgba(255,122,0,.45);
 
-    font-weight: 800;
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.3);
+}
+
+.module-icon {
+    width:
+        48px;
+
+    height:
+        48px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        20px;
+
+    border-radius:
+        13px;
+
+    background:
+        rgba(255,122,0,.09);
+
+    color:
+        #ff7a00;
+
+    font-size:
+        22px;
+}
+
+.module h3 {
+    font-size:
+        21px;
+}
+
+.module p {
+    margin-top:
+        10px;
+
+    color:
+        #777;
+
+    line-height:
+        1.6;
 }
 
 
-/* =====================================================
-   CTA
-===================================================== */
+/* =========================================================
+   STATS
+========================================================= */
 
-.cta {
+.stats {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:
+        15px;
+
+    margin-top:
+        60px;
+}
+
+.stat {
     padding:
-        110px 20px;
+        30px;
 
-    text-align: center;
-}
+    text-align:
+        center;
 
-.cta-box {
-    max-width: 900px;
-
-    margin: auto;
-
-    padding: 65px 30px;
+    background:
+        #101010;
 
     border:
         1px solid #252525;
 
-    border-radius: 25px;
+    border-radius:
+        18px;
+}
+
+.stat-number {
+    font-size:
+        42px;
+
+    font-weight:
+        950;
+
+    color:
+        #ff7a00;
+}
+
+.stat-label {
+    margin-top:
+        7px;
+
+    color:
+        #777;
+}
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+.download-box {
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    padding:
+        55px 40px;
+
+    text-align:
+        center;
 
     background:
         radial-gradient(
             circle at 50% 0%,
             rgba(255,122,0,.14),
-            transparent 50%
+            transparent 55%
         ),
         #101010;
+
+    border:
+        1px solid #292929;
+
+    border-radius:
+        24px;
 }
 
-.cta h2 {
+.download-box h2 {
     font-size:
-        clamp(35px, 6vw, 58px);
+        clamp(32px, 5vw, 50px);
 
-    letter-spacing: -3px;
+    letter-spacing:
+        -2px;
 }
 
-.cta p {
-    margin-top: 14px;
+.download-box p {
+    max-width:
+        650px;
 
-    color: #777;
+    margin:
+        14px auto 0;
 
-    line-height: 1.7;
+    color:
+        #777;
+
+    line-height:
+        1.7;
 }
 
-.cta-button {
-    display: inline-flex;
+.download-button {
+    display:
+        inline-flex;
 
-    align-items: center;
+    margin-top:
+        28px;
 
-    justify-content: center;
+    padding:
+        15px 27px;
 
-    margin-top: 30px;
+    border-radius:
+        11px;
 
-    padding: 15px 27px;
+    background:
+        #ff7a00;
 
-    border-radius: 11px;
+    color:
+        #080808;
 
-    background: #ff7a00;
+    text-decoration:
+        none;
 
-    color: #080808;
+    font-weight:
+        900;
 
-    text-decoration: none;
-
-    font-weight: 900;
-
-    transition: .2s;
+    transition:
+        .2s;
 }
 
-.cta-button:hover {
-    background: #ff9635;
+.download-button:hover {
+    background:
+        #ff9635;
 
     transform:
-        translateY(-2px);
+        translateY(-3px);
 
     box-shadow:
-        0 10px 30px
-        rgba(255,122,0,.2);
+        0 12px 35px
+        rgba(255,122,0,.25);
 }
 
 
-/* =====================================================
+/* =========================================================
+   CHANGELOG
+========================================================= */
+
+.changelog {
+    max-width:
+        850px;
+
+    margin:
+        auto;
+}
+
+.change {
+    display:
+        flex;
+
+    gap:
+        20px;
+
+    padding:
+        25px;
+
+    margin-bottom:
+        12px;
+
+    background:
+        #101010;
+
+    border:
+        1px solid #242424;
+
+    border-radius:
+        15px;
+
+    transition:
+        .2s;
+}
+
+.change:hover {
+    border-color:
+        rgba(255,122,0,.35);
+}
+
+.version {
+    flex-shrink:
+        0;
+
+    height:
+        fit-content;
+
+    padding:
+        7px 11px;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(255,122,0,.1);
+
+    color:
+        #ff9635;
+
+    font-size:
+        12px;
+
+    font-weight:
+        900;
+}
+
+.change h3 {
+    font-size:
+        17px;
+}
+
+.change p {
+    margin-top:
+        7px;
+
+    color:
+        #777;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq {
+    max-width:
+        850px;
+
+    margin:
+        auto;
+}
+
+.faq details {
+    margin-bottom:
+        10px;
+
+    padding:
+        20px 22px;
+
+    background:
+        #101010;
+
+    border:
+        1px solid #242424;
+
+    border-radius:
+        14px;
+}
+
+.faq summary {
+    cursor:
+        pointer;
+
+    font-weight:
+        800;
+
+    color:
+        #eee;
+}
+
+.faq p {
+    margin-top:
+        14px;
+
+    color:
+        #777;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   DISCORD
+========================================================= */
+
+.discord {
+    padding:
+        60px 30px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #0b0b0b
+        );
+
+    border:
+        1px solid #252525;
+
+    border-radius:
+        23px;
+}
+
+.discord-icon {
+    font-size:
+        45px;
+
+    margin-bottom:
+        15px;
+}
+
+.discord h2 {
+    font-size:
+        clamp(30px, 5vw, 45px);
+
+    letter-spacing:
+        -2px;
+}
+
+.discord p {
+    max-width:
+        600px;
+
+    margin:
+        12px auto 0;
+
+    color:
+        #777;
+
+    line-height:
+        1.7;
+}
+
+.discord-button {
+    display:
+        inline-flex;
+
+    margin-top:
+        25px;
+
+    padding:
+        13px 23px;
+
+    border-radius:
+        10px;
+
+    background:
+        #ff7a00;
+
+    color:
+        #080808;
+
+    text-decoration:
+        none;
+
+    font-weight:
+        900;
+}
+
+
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 .footer {
     padding:
         35px 20px;
 
-    text-align: center;
+    text-align:
+        center;
 
     border-top:
         1px solid #202020;
 
-    color: #555;
+    color:
+        #555;
 }
 
 .footer span {
-    color: #ff7a00;
+    color:
+        #ff7a00;
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
 @media (max-width: 850px) {
 
-    .navbar {
-        padding: 0 20px;
+    .nav-links {
+        display:
+            none;
     }
 
-    .features {
-        grid-template-columns: 1fr;
+    .modules {
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .development {
-        flex-direction: column;
-
-        align-items: flex-start;
+    .stats {
+        grid-template-columns:
+            1fr;
     }
 
-    .hero h1 {
-        letter-spacing: -4px;
-    }
 }
 
+@media (max-width: 550px) {
 
-@media (max-width: 500px) {
+    .container {
+        width:
+            min(
+                100% - 30px,
+                1120px
+            );
+    }
 
     .navbar {
-        height: 65px;
+        padding:
+            0 18px;
     }
 
     .logo {
-        font-size: 20px;
+        font-size:
+            20px;
     }
 
     .account-button {
         padding:
             9px 13px;
 
-        font-size: 13px;
+        font-size:
+            13px;
     }
 
     .hero {
         min-height:
-            calc(100vh - 65px);
+            calc(100vh - 72px);
 
         padding:
-            60px 18px;
+            70px 15px;
     }
 
     .hero h1 {
-        font-size: 55px;
+        letter-spacing:
+            -5px;
     }
 
     .hero-description {
-        font-size: 15px;
+        font-size:
+            15px;
     }
 
-    .primary-button,
-    .secondary-button {
-        width: 100%;
+    .button {
+        width:
+            100%;
     }
 
-    .client-block {
+    .modules {
+        grid-template-columns:
+            1fr;
+    }
+
+    .client-info {
+        flex-direction:
+            column;
+    }
+
+    .change {
+        flex-direction:
+            column;
+
+        gap:
+            12px;
+    }
+
+    .download-box {
         padding:
-            40px 22px;
-    }
-
-    .cta-box {
-        padding:
-            50px 20px;
-    }
-
-    .loading-logo {
-        font-size: 100px;
-        letter-spacing: -8px;
+            45px 20px;
     }
 
 }
@@ -990,9 +1293,9 @@ body {
 <body>
 
 
-<!-- =====================================================
-     LOADING SCREEN
-===================================================== -->
+<!-- =========================================================
+     LOADING
+========================================================= -->
 
 <div class="loading-screen" id="loadingScreen">
 
@@ -1003,19 +1306,35 @@ body {
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
      NAVBAR
-===================================================== -->
+========================================================= -->
 
 <header class="navbar">
 
-    <a
-        href="index.html"
-        class="logo"
-    >
+    <a href="index.html" class="logo">
         Porn<span>Client</span>
     </a>
 
+    <nav class="nav-links">
+
+        <a href="#modules">
+            Модули
+        </a>
+
+        <a href="#changelog">
+            Обновления
+        </a>
+
+        <a href="#faq">
+            FAQ
+        </a>
+
+        <a href="#discord">
+            Discord
+        </a>
+
+    </nav>
 
     <a
         href="login.html"
@@ -1028,9 +1347,9 @@ body {
 </header>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-===================================================== -->
+========================================================= -->
 
 <section class="hero">
 
@@ -1046,29 +1365,30 @@ body {
 
 
         <h1>
-            Porn<span>Client</span>
+            Porn<span class="orange">Client</span>
         </h1>
 
 
-        <div class="hero-title">
-            Один клиент — много возможностей
+        <div class="hero-subtitle">
+            Minecraft Client нового уровня
         </div>
 
 
         <p class="hero-description">
 
-            Современный интерфейс,
-            удобная система аккаунтов
-            и постоянно развивающийся проект.
+            Современный Minecraft-клиент
+            с удобным интерфейсом,
+            большим количеством модулей
+            и регулярными обновлениями.
 
         </p>
 
 
-        <div class="buttons">
+        <div class="hero-buttons">
 
             <a
-                href="#client"
-                class="primary-button"
+                href="#download"
+                class="button primary-button"
             >
                 Скачать клиент
             </a>
@@ -1076,7 +1396,7 @@ body {
 
             <a
                 href="login.html"
-                class="secondary-button"
+                class="button secondary-button"
                 id="heroAccountButton"
             >
                 Войти
@@ -1084,258 +1404,514 @@ body {
 
         </div>
 
-    </div>
 
-</section>
+        <div class="client-info">
 
-
-<!-- =====================================================
-     FEATURES
-===================================================== -->
-
-<section
-    class="section"
-    id="features"
->
-
-    <div class="section-header">
-
-        <h2>
-            Много возможностей
-        </h2>
-
-        <p>
-            Всё необходимое в одном месте
-        </p>
-
-    </div>
-
-
-    <div class="features">
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                ⚡
+            <div class="info-item">
+                Версия:
+                <strong>2.4.1</strong>
             </div>
 
-            <h3>
-                Производительность
-            </h3>
-
-            <p>
-                Быстрый и лёгкий интерфейс,
-                созданный с акцентом на удобство.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🎨
+            <div class="info-item">
+                Minecraft:
+                <strong>1.21.1</strong>
             </div>
 
-            <h3>
-                Современный дизайн
-            </h3>
-
-            <p>
-                Тёмная тема, оранжевые акценты
-                и приятная адаптация под разные экраны.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                👤
+            <div class="info-item">
+                Loader:
+                <strong>Fabric</strong>
             </div>
 
-            <h3>
-                Личный кабинет
-            </h3>
-
-            <p>
-                Управляй аккаунтом и
-                просматривай информацию о подписке.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🔄
+            <div class="info-item">
+                Status:
+                <strong class="orange">Online</strong>
             </div>
 
-            <h3>
-                Регулярные обновления
-            </h3>
-
-            <p>
-                Проект развивается,
-                а новые возможности появляются постепенно.
-            </p>
-
         </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🚀
-            </div>
-
-            <h3>
-                Удобство
-            </h3>
-
-            <p>
-                Простая навигация и доступ
-                к основным функциям в несколько кликов.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🔒
-            </div>
-
-            <h3>
-                Система аккаунтов
-            </h3>
-
-            <p>
-                Регистрация, вход и
-                персональный личный кабинет.
-            </p>
-
-        </div>
-
 
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     CLIENT
-===================================================== -->
+<!-- =========================================================
+     MODULES
+========================================================= -->
 
 <section
     class="section"
-    id="client"
+    id="modules"
 >
 
-    <div class="client-block">
+<div class="container">
+
+    <h2 class="section-title">
+        Возможности клиента
+    </h2>
+
+    <p class="section-description">
+
+        Основные категории модулей,
+        которые доступны внутри PornClient.
+
+    </p>
+
+
+    <div class="modules">
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                ⚔️
+            </div>
+
+            <h3>
+                Combat
+            </h3>
+
+            <p>
+                Инструменты для PvP,
+                настройки боя и удобного управления.
+            </p>
+
+        </div>
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                👁️
+            </div>
+
+            <h3>
+                Visuals
+            </h3>
+
+            <p>
+                Визуальные настройки,
+                HUD и дополнительные эффекты.
+            </p>
+
+        </div>
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                🏃
+            </div>
+
+            <h3>
+                Movement
+            </h3>
+
+            <p>
+                Настройки передвижения
+                и различные варианты движения.
+            </p>
+
+        </div>
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                🎯
+            </div>
+
+            <h3>
+                Player
+            </h3>
+
+            <p>
+                Дополнительные функции
+                для управления персонажем.
+            </p>
+
+        </div>
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                🌎
+            </div>
+
+            <h3>
+                World
+            </h3>
+
+            <p>
+                Функции взаимодействия
+                с игровым миром.
+            </p>
+
+        </div>
+
+
+        <div class="module">
+
+            <div class="module-icon">
+                ⚙️
+            </div>
+
+            <h3>
+                Misc
+            </h3>
+
+            <p>
+                Дополнительные инструменты,
+                настройки и возможности клиента.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-number">
+                12K+
+            </div>
+
+            <div class="stat-label">
+                Пользователей
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                38K+
+            </div>
+
+            <div class="stat-label">
+                Загрузок
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                2.4.1
+            </div>
+
+            <div class="stat-label">
+                Текущая версия
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     DOWNLOAD
+========================================================= -->
+
+<section
+    class="section"
+    id="download"
+>
+
+<div class="container">
+
+    <div class="download-box">
 
         <h2>
-            Один клиент —
-            <span>много возможностей</span>
+            Скачать
+            <span class="orange">
+                PornClient
+            </span>
         </h2>
-
 
         <p>
 
-            Скачай актуальную версию клиента
-            и следи за обновлениями проекта.
+            Получи последнюю версию клиента
+            и используй все доступные возможности.
 
         </p>
 
+
+        <!-- ЗАМЕНИ # НА ССЫЛКУ НА ФАЙЛ -->
 
         <a
             href="#"
             class="download-button"
-            onclick="alert('Ссылка на скачивание пока не добавлена.'); return false;"
+            onclick="
+                alert(
+                    'Ссылка на скачивание пока не добавлена.'
+                );
+                return false;
+            "
         >
-            Скачать клиент
+            ↓ Скачать v2.4.1
         </a>
 
     </div>
 
+</div>
+
 </section>
 
 
-<!-- =====================================================
-     DEVELOPMENT
-===================================================== -->
+<!-- =========================================================
+     CHANGELOG
+========================================================= -->
 
-<section class="section">
+<section
+    class="section"
+    id="changelog"
+>
 
-    <div class="development">
+<div class="container">
+
+    <h2 class="section-title">
+        Обновления
+    </h2>
+
+    <p class="section-description">
+        Последние изменения клиента.
+    </p>
 
 
-        <div class="development-text">
+    <div class="changelog">
 
-            <h2>
-                Клиент активно развивается
-            </h2>
 
-            <p>
-                Мы постоянно работаем над проектом,
-                улучшаем интерфейс и добавляем новые
-                возможности.
-            </p>
+        <div class="change">
+
+            <div class="version">
+                v2.4.1
+            </div>
+
+            <div>
+
+                <h3>
+                    Новое обновление
+                </h3>
+
+                <p>
+                    Улучшена стабильность,
+                    интерфейс и работа основных функций.
+                </p>
+
+            </div>
 
         </div>
 
 
-        <div class="development-badge">
+        <div class="change">
 
-            ACTIVE DEVELOPMENT
+            <div class="version">
+                v2.4.0
+            </div>
+
+            <div>
+
+                <h3>
+                    Новый интерфейс
+                </h3>
+
+                <p>
+                    Полностью обновлена
+                    визуальная часть клиента.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="change">
+
+            <div class="version">
+                v2.3.8
+            </div>
+
+            <div>
+
+                <h3>
+                    Исправления
+                </h3>
+
+                <p>
+                    Исправлены ошибки,
+                    вызывавшие нестабильную работу.
+                </p>
+
+            </div>
 
         </div>
 
 
     </div>
 
+</div>
+
 </section>
 
 
-<!-- =====================================================
-     CTA
-===================================================== -->
+<!-- =========================================================
+     DISCORD
+========================================================= -->
 
-<section class="cta">
+<section
+    class="section"
+    id="discord"
+>
 
-    <div class="cta-box">
+<div class="container">
+
+    <div class="discord">
+
+        <div class="discord-icon">
+            💬
+        </div>
 
         <h2>
-            Готов попробовать?
+            Присоединяйся к
+            <span class="orange">
+                сообществу
+            </span>
         </h2>
 
-
         <p>
-            Создай аккаунт и получи доступ
-            к своему личному кабинету.
+
+            Новости клиента,
+            обновления, поддержка
+            и общение с другими пользователями.
+
         </p>
 
 
+        <!-- ЗАМЕНИ # НА ССЫЛКУ DISCORD -->
+
         <a
-            href="login.html"
-            class="cta-button"
-            id="ctaButton"
+            href="#"
+            class="discord-button"
+            onclick="
+                alert(
+                    'Ссылка на Discord пока не добавлена.'
+                );
+                return false;
+            "
         >
-            Создать аккаунт
+            Открыть Discord
         </a>
 
     </div>
 
+</div>
+
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section
+    class="section"
+    id="faq"
+>
+
+<div class="container">
+
+    <h2 class="section-title">
+        FAQ
+    </h2>
+
+    <p class="section-description">
+        Часто задаваемые вопросы.
+    </p>
+
+
+    <div class="faq">
+
+
+        <details>
+
+            <summary>
+                Какие версии Minecraft поддерживаются?
+            </summary>
+
+            <p>
+                На данный момент клиент рассчитан
+                на Minecraft 1.21.1.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                Как скачать клиент?
+            </summary>
+
+            <p>
+                Перейди в раздел скачивания
+                и нажми кнопку загрузки.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                Нужен ли аккаунт?
+            </summary>
+
+            <p>
+                Некоторые функции клиента
+                могут требовать авторизации
+                через личный кабинет.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+                Где смотреть обновления?
+            </summary>
+
+            <p>
+                Все основные изменения
+                публикуются в разделе обновлений
+                и в сообществе проекта.
+            </p>
+
+        </details>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
      FOOTER
-===================================================== -->
+========================================================= -->
 
 <footer class="footer">
 
@@ -1346,9 +1922,9 @@ body {
 </footer>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SUPABASE
-===================================================== -->
+========================================================= -->
 
 <script>
 
@@ -1366,9 +1942,9 @@ const supabaseClient =
     );
 
 
-/* =====================================================
-   ПРОВЕРКА АККАУНТА
-===================================================== */
+/* =========================================================
+   ACCOUNT
+========================================================= */
 
 async function updateAccountButtons() {
 
@@ -1389,11 +1965,6 @@ async function updateAccountButtons() {
             "heroAccountButton"
         );
 
-    const ctaButton =
-        document.getElementById(
-            "ctaButton"
-        );
-
 
     if (error) {
 
@@ -1402,10 +1973,6 @@ async function updateAccountButtons() {
         return;
     }
 
-
-    /*
-       ПОЛЬЗОВАТЕЛЬ ВОШЁЛ
-    */
 
     if (data.user) {
 
@@ -1423,17 +1990,6 @@ async function updateAccountButtons() {
             "account.html";
 
 
-        ctaButton.textContent =
-            "Личный кабинет";
-
-        ctaButton.href =
-            "account.html";
-
-
-    /*
-       ПОЛЬЗОВАТЕЛЬ НЕ ВОШЁЛ
-    */
-
     } else {
 
         accountButton.textContent =
@@ -1449,13 +2005,6 @@ async function updateAccountButtons() {
         heroAccountButton.href =
             "login.html";
 
-
-        ctaButton.textContent =
-            "Создать аккаунт";
-
-        ctaButton.href =
-            "login.html";
-
     }
 
 }
@@ -1464,30 +2013,33 @@ async function updateAccountButtons() {
 updateAccountButtons();
 
 
-/* =====================================================
-   LOADING ANIMATION
-===================================================== */
+/* =========================================================
+   LOADING
+========================================================= */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+    "load",
+    () => {
 
-    const loadingScreen =
-        document.getElementById(
-            "loadingScreen"
+        const loadingScreen =
+            document.getElementById(
+                "loadingScreen"
+            );
+
+
+        setTimeout(
+            () => {
+
+                loadingScreen.classList.add(
+                    "hide"
+                );
+
+            },
+            1450
         );
 
-
-    /*
-       Ждём окончания анимации PC,
-       затем убираем загрузочный экран.
-    */
-
-    setTimeout(() => {
-
-        loadingScreen.classList.add("hide");
-
-    }, 1450);
-
-});
+    }
+);
 
 </script>
 
