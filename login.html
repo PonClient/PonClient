@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PornClient — Вход</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -24,9 +25,11 @@ body {
     color: white;
 
     background:
-        radial-gradient(circle at top right,
-        rgba(255,122,0,.18),
-        transparent 35%),
+        radial-gradient(
+            circle at top right,
+            rgba(255,122,0,.18),
+            transparent 35%
+        ),
         #070707;
 }
 
@@ -61,7 +64,6 @@ body {
 input {
     width: 100%;
     padding: 14px;
-
     margin-top: 10px;
 
     background: #080808;
@@ -80,6 +82,7 @@ input:focus {
 label {
     display: block;
     margin-top: 18px;
+
     color: #bbb;
     font-size: 14px;
 }
@@ -87,7 +90,6 @@ label {
 button {
     width: 100%;
     padding: 14px;
-
     margin-top: 22px;
 
     border: 0;
@@ -109,6 +111,7 @@ button:hover {
 
 .switch {
     margin-top: 20px;
+
     text-align: center;
     color: #888;
     font-size: 14px;
@@ -120,7 +123,9 @@ button:hover {
 }
 
 .message {
+    min-height: 20px;
     margin-top: 15px;
+
     text-align: center;
     font-size: 14px;
     color: #ff9635;
@@ -143,6 +148,7 @@ button:hover {
     <form id="authForm">
 
         <label>Email</label>
+
         <input
             id="email"
             type="email"
@@ -151,6 +157,7 @@ button:hover {
         >
 
         <label>Пароль</label>
+
         <input
             id="password"
             type="password"
@@ -166,6 +173,7 @@ button:hover {
     </form>
 
     <div class="switch">
+
         <span id="switchText">
             Нет аккаунта?
         </span>
@@ -173,6 +181,7 @@ button:hover {
         <a id="switchMode">
             Зарегистрироваться
         </a>
+
     </div>
 
     <div class="message" id="message"></div>
@@ -181,6 +190,10 @@ button:hover {
 
 
 <script>
+
+/* =========================
+   НАСТРОЙКИ SUPABASE
+========================= */
 
 const SUPABASE_URL =
     "https://oqswqzfjpupiglxxspdt.supabase.co";
@@ -196,8 +209,11 @@ const supabaseClient =
     );
 
 
-let registerMode = false;
+/* =========================
+   ЭЛЕМЕНТЫ
+========================= */
 
+let registerMode = false;
 
 const form =
     document.getElementById("authForm");
@@ -217,6 +233,11 @@ const switchText =
 const message =
     document.getElementById("message");
 
+
+/* =========================
+   ПЕРЕКЛЮЧЕНИЕ
+   ВХОД ↔ РЕГИСТРАЦИЯ
+========================= */
 
 switchMode.addEventListener("click", () => {
 
@@ -256,6 +277,10 @@ switchMode.addEventListener("click", () => {
 });
 
 
+/* =========================
+   РЕГИСТРАЦИЯ И ВХОД
+========================= */
+
 form.addEventListener("submit", async (event) => {
 
     event.preventDefault();
@@ -271,19 +296,31 @@ form.addEventListener("submit", async (event) => {
         document.getElementById("password").value;
 
 
+    /* ===== РЕГИСТРАЦИЯ ===== */
+
     if (registerMode) {
 
         const { data, error } =
             await supabaseClient.auth.signUp({
+
                 email: email,
-                password: password
+
+                password: password,
+
+                options: {
+
+                    emailRedirectTo:
+                        "https://pornclient.github.io/PornClient/login.html"
+
+                }
+
             });
 
 
         if (error) {
 
             message.textContent =
-                error.message;
+                "Ошибка: " + error.message;
 
             return;
         }
@@ -292,12 +329,20 @@ form.addEventListener("submit", async (event) => {
         message.textContent =
             "Аккаунт создан! Проверьте почту для подтверждения.";
 
-    } else {
+    }
+
+
+    /* ===== ВХОД ===== */
+
+    else {
 
         const { data, error } =
             await supabaseClient.auth.signInWithPassword({
+
                 email: email,
+
                 password: password
+
             });
 
 
@@ -312,6 +357,7 @@ form.addEventListener("submit", async (event) => {
 
         window.location.href =
             "account.html";
+
     }
 
 });
