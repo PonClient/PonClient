@@ -29,8 +29,6 @@ body {
         #070707;
 }
 
-/* NAVBAR */
-
 .navbar {
     height: 72px;
 
@@ -79,9 +77,6 @@ body {
     color: #ff7a00;
 }
 
-
-/* CONTENT */
-
 .container {
     max-width: 1000px;
 
@@ -104,9 +99,6 @@ body {
     margin-top: 10px;
     color: #888;
 }
-
-
-/* CARDS */
 
 .account {
     display: grid;
@@ -162,9 +154,6 @@ body {
     color: #ff7a00;
 }
 
-
-/* STATUS */
-
 .status {
     display: inline-flex;
 
@@ -200,9 +189,6 @@ body {
         0 0 10px #ff7a00;
 }
 
-
-/* SUBSCRIPTION */
-
 .subscription-active {
     color: #ff7a00;
 }
@@ -210,9 +196,6 @@ body {
 .subscription-free {
     color: #888;
 }
-
-
-/* WELCOME */
 
 .welcome {
     margin-top: 18px;
@@ -244,9 +227,6 @@ body {
     line-height: 1.7;
 }
 
-
-/* MOBILE */
-
 @media (max-width: 700px) {
 
     .navbar {
@@ -267,7 +247,6 @@ body {
 
 <body>
 
-
 <header class="navbar">
 
     <a
@@ -286,9 +265,7 @@ body {
 
 </header>
 
-
 <main class="container">
-
 
     <div class="header">
 
@@ -302,11 +279,7 @@ body {
 
     </div>
 
-
     <section class="account">
-
-
-        <!-- EMAIL -->
 
         <div class="card">
 
@@ -322,9 +295,6 @@ body {
             </div>
 
         </div>
-
-
-        <!-- STATUS -->
 
         <div class="card">
 
@@ -346,9 +316,6 @@ body {
 
         </div>
 
-
-        <!-- DATE -->
-
         <div class="card">
 
             <div class="card-title">
@@ -363,9 +330,6 @@ body {
             </div>
 
         </div>
-
-
-        <!-- ID -->
 
         <div class="card">
 
@@ -382,9 +346,6 @@ body {
 
         </div>
 
-
-        <!-- SUBSCRIPTION -->
-
         <div class="card">
 
             <div class="card-title">
@@ -399,9 +360,6 @@ body {
             </div>
 
         </div>
-
-
-        <!-- EXPIRATION -->
 
         <div class="card">
 
@@ -418,9 +376,6 @@ body {
 
         </div>
 
-
-        <!-- DAYS -->
-
         <div class="card">
 
             <div class="card-title">
@@ -436,9 +391,7 @@ body {
 
         </div>
 
-
     </section>
-
 
     <section class="welcome">
 
@@ -456,15 +409,9 @@ body {
 
     </section>
 
-
 </main>
 
-
 <script>
-
-/* =========================
-   SUPABASE
-========================= */
 
 const SUPABASE_URL =
     "https://oqswqzfjpupiglxxspdt.supabase.co";
@@ -480,10 +427,6 @@ const supabaseClient =
     );
 
 
-/* =========================
-   ЗАГРУЗКА АККАУНТА
-========================= */
-
 async function loadAccount() {
 
     const {
@@ -492,8 +435,6 @@ async function loadAccount() {
     } =
         await supabaseClient.auth.getUser();
 
-
-    /* Если пользователь не вошёл */
 
     if (error || !data.user) {
 
@@ -508,29 +449,17 @@ async function loadAccount() {
         data.user;
 
 
-    /* =========================
-       EMAIL
-    ========================= */
-
     document.getElementById(
         "email"
     ).textContent =
         user.email || "Не указан";
 
 
-    /* =========================
-       USER ID
-    ========================= */
-
     document.getElementById(
         "userId"
     ).textContent =
         user.id;
 
-
-    /* =========================
-       ДАТА РЕГИСТРАЦИИ
-    ========================= */
 
     if (user.created_at) {
 
@@ -552,10 +481,6 @@ async function loadAccount() {
             );
     }
 
-
-    /* =========================
-       ПРОФИЛЬ
-    ========================= */
 
     const {
         data: profile,
@@ -586,10 +511,6 @@ async function loadAccount() {
         );
 
 
-    /* =========================
-       ОШИБКА
-    ========================= */
-
     if (profileError) {
 
         console.error(
@@ -609,14 +530,10 @@ async function loadAccount() {
     }
 
 
-    /* =========================
-       ПРОФИЛЬ НЕ СОЗДАН
-    ========================= */
-
     if (!profile) {
 
         planElement.textContent =
-            "Free";
+            "Не активна";
 
         planElement.className =
             "card-value subscription-free";
@@ -631,22 +548,33 @@ async function loadAccount() {
     }
 
 
-    /* =========================
-       ТАРИФ
-    ========================= */
-
     const plan =
         profile.subscription_plan ||
         "Free";
 
 
-    planElement.textContent =
-        plan;
+    /*
+       Free в базе =
+       Не активна на сайте
+    */
 
+    if (plan === "Free") {
 
-    /* =========================
-       ПОДПИСКА
-    ========================= */
+        planElement.textContent =
+            "Не активна";
+
+        planElement.className =
+            "card-value subscription-free";
+
+    } else {
+
+        planElement.textContent =
+            plan;
+
+        planElement.className =
+            "card-value subscription-active";
+    }
+
 
     if (
         profile.subscription_expires_at
@@ -657,12 +585,9 @@ async function loadAccount() {
                 profile.subscription_expires_at
             );
 
-
         const now =
             new Date();
 
-
-        /* Дата */
 
         expiresElement.textContent =
             expires.toLocaleDateString(
@@ -674,8 +599,6 @@ async function loadAccount() {
                 }
             );
 
-
-        /* Разница */
 
         const difference =
             expires.getTime() -
@@ -696,8 +619,6 @@ async function loadAccount() {
             days;
 
 
-        /* Проверяем активность */
-
         if (
             expires > now &&
             plan !== "Free"
@@ -707,6 +628,9 @@ async function loadAccount() {
                 "card-value subscription-active";
 
         } else {
+
+            planElement.textContent =
+                "Не активна";
 
             planElement.className =
                 "card-value subscription-free";
@@ -722,17 +646,10 @@ async function loadAccount() {
 
         daysElement.textContent =
             "0";
-
-        planElement.className =
-            "card-value subscription-free";
     }
 
 }
 
-
-/* =========================
-   ВЫХОД
-========================= */
 
 document
     .getElementById("logout")
@@ -750,10 +667,6 @@ document
         }
     );
 
-
-/* =========================
-   ЗАПУСК
-========================= */
 
 loadAccount();
 
