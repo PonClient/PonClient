@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PornClient — Лучший Cheat Client</title>
+<title>PornClient — Один клиент, много возможностей</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,7 +23,7 @@ html {
 body {
     min-height: 100vh;
 
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
     color: #fff;
 
@@ -53,13 +54,11 @@ body {
 
     padding: 0 7%;
 
-    background:
-        rgba(7, 7, 7, .82);
+    background: rgba(7,7,7,.86);
 
     backdrop-filter: blur(18px);
 
-    border-bottom:
-        1px solid #202020;
+    border-bottom: 1px solid #202020;
 }
 
 .logo {
@@ -67,7 +66,7 @@ body {
 
     text-decoration: none;
 
-    font-size: 24px;
+    font-size: 23px;
 
     font-weight: 900;
 
@@ -79,11 +78,13 @@ body {
 
     text-shadow:
         0 0 20px
-        rgba(255, 122, 0, .5);
+        rgba(255,122,0,.5);
 }
 
 
-/* ACCOUNT BUTTON */
+/* =========================
+   ACCOUNT BUTTON
+========================= */
 
 .account-button {
     display: inline-flex;
@@ -91,37 +92,29 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding:
-        10px 18px;
+    padding: 10px 18px;
 
     border-radius: 10px;
 
-    background:
-        #ff7a00;
+    background: #ff7a00;
 
-    color:
-        #080808;
+    color: #080808;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .account-button:hover {
-    background:
-        #ff9635;
+    background: #ff9635;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
         0 8px 25px
-        rgba(255, 122, 0, .18);
+        rgba(255,122,0,.2);
 }
 
 
@@ -135,23 +128,17 @@ body {
     min-height:
         calc(100vh - 72px);
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    text-align:
-        center;
+    text-align: center;
 
-    padding:
-        80px 20px;
+    padding: 90px 20px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 }
 
 .hero::before {
@@ -159,192 +146,204 @@ body {
 
     position: absolute;
 
-    width: 500px;
-    height: 500px;
+    width: 550px;
+    height: 550px;
 
     border-radius: 50%;
 
     background:
-        rgba(255, 122, 0, .08);
+        rgba(255,122,0,.07);
 
-    filter:
-        blur(100px);
+    filter: blur(100px);
 
-    top: 10%;
-    right: -180px;
+    top: 0;
+    right: -200px;
 
-    pointer-events:
-        none;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,122,0,.04);
+
+    filter: blur(100px);
+
+    bottom: -200px;
+    left: -150px;
+
+    pointer-events: none;
 }
 
 .hero-content {
     position: relative;
 
-    max-width:
-        900px;
+    z-index: 2;
+
+    max-width: 900px;
 }
 
-.badge {
-    display:
-        inline-block;
+.status-badge {
+    display: inline-flex;
 
-    padding:
-        8px 14px;
+    align-items: center;
 
-    margin-bottom:
-        25px;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    margin-bottom: 25px;
 
     border:
         1px solid
-        rgba(255, 122, 0, .25);
+        rgba(255,122,0,.25);
 
-    border-radius:
-        999px;
-
-    color:
-        #ff9635;
+    border-radius: 999px;
 
     background:
-        rgba(255, 122, 0, .07);
+        rgba(255,122,0,.07);
 
-    font-size:
-        13px;
+    color: #ff9635;
 
-    font-weight:
-        700;
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff7a00;
+
+    box-shadow:
+        0 0 10px
+        #ff7a00;
 }
 
 .hero h1 {
     font-size:
-        clamp(50px, 9vw, 100px);
+        clamp(55px, 10vw, 105px);
 
-    line-height:
-        .95;
+    line-height: .95;
 
-    letter-spacing:
-        -5px;
+    letter-spacing: -6px;
 
-    font-weight:
-        950;
+    font-weight: 950;
 }
 
 .hero h1 span {
-    color:
-        #ff7a00;
+    color: #ff7a00;
 
     text-shadow:
         0 0 35px
-        rgba(255, 122, 0, .35);
+        rgba(255,122,0,.35);
 }
 
-.hero h2 {
-    margin-top:
-        25px;
+.hero-title {
+    margin-top: 25px;
 
     font-size:
-        clamp(24px, 4vw, 42px);
+        clamp(27px, 4vw, 43px);
 
-    color:
-        #eee;
+    color: #eee;
+
+    letter-spacing: -1px;
 }
 
-.hero p {
-    max-width:
-        700px;
+.hero-description {
+    max-width: 720px;
 
     margin:
         22px auto 0;
 
-    color:
-        #888;
+    color: #888;
 
-    font-size:
-        17px;
+    font-size: 17px;
 
-    line-height:
-        1.7;
+    line-height: 1.7;
 }
 
 
-/* BUTTONS */
+/* =========================
+   HERO BUTTONS
+========================= */
 
 .buttons {
-    display:
-        flex;
+    display: flex;
 
-    justify-content:
-        center;
+    align-items: center;
 
-    gap:
-        12px;
+    justify-content: center;
 
-    flex-wrap:
-        wrap;
+    gap: 12px;
 
-    margin-top:
-        35px;
+    flex-wrap: wrap;
+
+    margin-top: 35px;
 }
 
 .primary-button,
 .secondary-button {
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        14px 24px;
+    min-width: 170px;
 
-    border-radius:
-        11px;
+    padding: 14px 24px;
 
-    text-decoration:
-        none;
+    border-radius: 11px;
 
-    font-weight:
-        800;
+    text-decoration: none;
 
-    transition:
-        .2s;
+    font-weight: 800;
+
+    transition: .2s;
 }
 
 .primary-button {
-    background:
-        #ff7a00;
+    background: #ff7a00;
 
-    color:
-        #080808;
+    color: #080808;
 }
 
 .primary-button:hover {
-    background:
-        #ff9635;
+    background: #ff9635;
 
     transform:
         translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,122,0,.2);
 }
 
 .secondary-button {
+    background: #111;
+
     border:
         1px solid #292929;
 
-    background:
-        #111;
-
-    color:
-        #ddd;
+    color: #ddd;
 }
 
 .secondary-button:hover {
-    border-color:
-        #ff7a00;
+    border-color: #ff7a00;
 
-    color:
-        #ff7a00;
+    color: #ff7a00;
 
     transform:
         translateY(-2px);
@@ -352,58 +351,56 @@ body {
 
 
 /* =========================
-   FEATURES
+   FEATURES SECTION
 ========================= */
 
 .section {
-    max-width:
-        1100px;
+    max-width: 1100px;
 
-    margin:
-        auto;
+    margin: auto;
 
-    padding:
-        100px 20px;
+    padding: 100px 20px;
 }
 
 .section-header {
-    text-align:
-        center;
+    text-align: center;
 
-    margin-bottom:
-        45px;
+    margin-bottom: 50px;
 }
 
 .section-header h2 {
     font-size:
-        clamp(32px, 5vw, 52px);
+        clamp(34px, 5vw, 54px);
 
-    letter-spacing:
-        -2px;
+    letter-spacing: -2px;
 }
 
 .section-header p {
-    margin-top:
-        12px;
+    margin-top: 12px;
 
-    color:
-        #777;
+    color: #777;
+
+    font-size: 16px;
 }
 
+
+/* =========================
+   FEATURE GRID
+========================= */
+
 .features {
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap:
-        18px;
+    gap: 18px;
 }
 
 .feature {
-    padding:
-        30px;
+    padding: 30px;
+
+    min-height: 210px;
 
     background:
         linear-gradient(
@@ -415,11 +412,9 @@ body {
     border:
         1px solid #252525;
 
-    border-radius:
-        18px;
+    border-radius: 18px;
 
-    transition:
-        .25s;
+    transition: .25s;
 }
 
 .feature:hover {
@@ -427,105 +422,267 @@ body {
         translateY(-5px);
 
     border-color:
-        rgba(255, 122, 0, .5);
+        rgba(255,122,0,.5);
 
     box-shadow:
         0 15px 40px
-        rgba(0, 0, 0, .25);
+        rgba(0,0,0,.25);
 }
 
-.icon {
-    width:
-        45px;
+.feature-icon {
+    width: 46px;
+    height: 46px;
 
-    height:
-        45px;
+    display: flex;
 
-    display:
-        flex;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    margin-bottom: 20px;
 
-    margin-bottom:
-        20px;
-
-    border-radius:
-        12px;
+    border-radius: 12px;
 
     background:
-        rgba(255, 122, 0, .1);
+        rgba(255,122,0,.1);
 
     color:
         #ff7a00;
 
-    font-size:
-        22px;
+    font-size: 22px;
 }
 
 .feature h3 {
-    font-size:
-        20px;
+    font-size: 20px;
 }
 
 .feature p {
-    margin-top:
-        10px;
+    margin-top: 10px;
 
-    color:
-        #777;
+    color: #777;
 
-    line-height:
-        1.6;
+    line-height: 1.6;
 }
 
 
 /* =========================
-   INFO
+   CLIENT BLOCK
 ========================= */
 
-.info {
-    max-width:
-        900px;
+.client-block {
+    max-width: 1000px;
 
-    margin:
-        auto;
+    margin: 0 auto;
 
-    padding:
-        35px;
+    padding: 55px 35px;
+
+    text-align: center;
 
     border:
         1px solid #252525;
 
-    border-radius:
-        20px;
+    border-radius: 22px;
 
     background:
         radial-gradient(
-            circle at 100% 0%,
-            rgba(255, 122, 0, .12),
-            transparent 40%
+            circle at 50% 0%,
+            rgba(255,122,0,.13),
+            transparent 45%
         ),
         #101010;
 }
 
-.info h2 {
+.client-block h2 {
     font-size:
-        30px;
+        clamp(30px, 5vw, 48px);
+
+    letter-spacing: -2px;
 }
 
-.info p {
-    margin-top:
-        15px;
+.client-block h2 span {
+    color: #ff7a00;
+}
 
-    color:
-        #888;
+.client-block p {
+    max-width: 650px;
 
-    line-height:
-        1.8;
+    margin:
+        15px auto 0;
+
+    color: #888;
+
+    line-height: 1.7;
+}
+
+.download-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 28px;
+
+    padding: 14px 25px;
+
+    border-radius: 11px;
+
+    background: #ff7a00;
+
+    color: #080808;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.download-button:hover {
+    background: #ff9635;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================
+   DEVELOPMENT
+========================= */
+
+.development {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 35px;
+
+    border:
+        1px solid #252525;
+
+    border-radius: 20px;
+
+    background: #101010;
+}
+
+.development-text h2 {
+    font-size: 28px;
+}
+
+.development-text p {
+    margin-top: 10px;
+
+    color: #777;
+
+    line-height: 1.6;
+}
+
+.development-badge {
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,122,0,.08);
+
+    border:
+        1px solid
+        rgba(255,122,0,.25);
+
+    color: #ff9635;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    padding:
+        110px 20px;
+
+    text-align: center;
+}
+
+.cta-box {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 65px 30px;
+
+    border:
+        1px solid #252525;
+
+    border-radius: 25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,122,0,.14),
+            transparent 50%
+        ),
+        #101010;
+}
+
+.cta h2 {
+    font-size:
+        clamp(35px, 6vw, 58px);
+
+    letter-spacing: -3px;
+}
+
+.cta p {
+    margin-top: 14px;
+
+    color: #777;
+
+    line-height: 1.7;
+}
+
+.cta-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 30px;
+
+    padding: 15px 27px;
+
+    border-radius: 11px;
+
+    background: #ff7a00;
+
+    color: #080808;
+
+    text-decoration: none;
+
+    font-weight: 900;
+
+    transition: .2s;
+}
+
+.cta-button:hover {
+    background: #ff9635;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,122,0,.2);
 }
 
 
@@ -537,19 +694,16 @@ body {
     padding:
         35px 20px;
 
-    text-align:
-        center;
+    text-align: center;
 
     border-top:
         1px solid #202020;
 
-    color:
-        #555;
+    color: #555;
 }
 
 .footer span {
-    color:
-        #ff7a00;
+    color: #ff7a00;
 }
 
 
@@ -557,47 +711,43 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
 
     .navbar {
-        padding:
-            0 20px;
+        padding: 0 20px;
     }
 
     .features {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
+    }
+
+    .development {
+        flex-direction: column;
+
+        align-items: flex-start;
     }
 
     .hero h1 {
-        letter-spacing:
-            -3px;
-    }
-
-    .section {
-        padding:
-            70px 20px;
+        letter-spacing: -4px;
     }
 }
+
 
 @media (max-width: 500px) {
 
     .navbar {
-        height:
-            65px;
+        height: 65px;
     }
 
     .logo {
-        font-size:
-            20px;
+        font-size: 20px;
     }
 
     .account-button {
         padding:
             9px 13px;
 
-        font-size:
-            13px;
+        font-size: 13px;
     }
 
     .hero {
@@ -609,29 +759,32 @@ body {
     }
 
     .hero h1 {
-        font-size:
-            54px;
+        font-size: 55px;
     }
 
-    .hero p {
-        font-size:
-            15px;
+    .hero-description {
+        font-size: 15px;
     }
 
     .primary-button,
     .secondary-button {
-        width:
-            100%;
+        width: 100%;
     }
 
-    .info {
+    .client-block {
         padding:
-            25px;
+            40px 22px;
+    }
+
+    .cta-box {
+        padding:
+            50px 20px;
     }
 }
-</style>
 
+</style>
 </head>
+
 
 <body>
 
@@ -670,8 +823,12 @@ body {
     <div class="hero-content">
 
 
-        <div class="badge">
-            PCLIENT V1
+        <div class="status-badge">
+
+            <span class="status-dot"></span>
+
+            Клиент активно развивается
+
         </div>
 
 
@@ -680,25 +837,27 @@ body {
         </h1>
 
 
-        <h2>
-            Лучший Cheat Client
-        </h2>
+        <div class="hero-title">
+            Один клиент — много возможностей
+        </div>
 
 
-        <p>
-            Быстрый и приятный интерфейс,
-            множество функций и удобная система
-            управления аккаунтом.
+        <p class="hero-description">
+
+            Современный интерфейс,
+            удобная система аккаунтов
+            и постоянно развивающийся проект.
+
         </p>
 
 
         <div class="buttons">
 
             <a
-                href="#features"
+                href="#client"
                 class="primary-button"
             >
-                Узнать больше
+                Скачать клиент
             </a>
 
 
@@ -729,11 +888,11 @@ body {
     <div class="section-header">
 
         <h2>
-            Возможности
+            Много возможностей
         </h2>
 
         <p>
-            Всё необходимое в одном интерфейсе
+            Всё необходимое в одном месте
         </p>
 
     </div>
@@ -744,17 +903,17 @@ body {
 
         <div class="feature">
 
-            <div class="icon">
+            <div class="feature-icon">
                 ⚡
             </div>
 
             <h3>
-                Высокая производительность
+                Производительность
             </h3>
 
             <p>
-                Оптимизированный интерфейс
-                и быстрая работа клиента.
+                Быстрый и лёгкий интерфейс,
+                созданный с акцентом на удобство.
             </p>
 
         </div>
@@ -762,35 +921,17 @@ body {
 
         <div class="feature">
 
-            <div class="icon">
-                🛡
-            </div>
-
-            <h3>
-                Обход популярных серверов
-            </h3>
-
-            <p>
-                Поддержка различных серверов
-                и регулярное обновление функций.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="icon">
+            <div class="feature-icon">
                 🎨
             </div>
 
             <h3>
-                Приятный интерфейс
+                Современный дизайн
             </h3>
 
             <p>
-                Современный тёмный дизайн
-                с оранжевыми акцентами.
+                Тёмная тема, оранжевые акценты
+                и приятная адаптация под разные экраны.
             </p>
 
         </div>
@@ -798,7 +939,7 @@ body {
 
         <div class="feature">
 
-            <div class="icon">
+            <div class="feature-icon">
                 👤
             </div>
 
@@ -807,8 +948,8 @@ body {
             </h3>
 
             <p>
-                Управление аккаунтом,
-                подпиской и профилем.
+                Управляй аккаунтом и
+                просматривай информацию о подписке.
             </p>
 
         </div>
@@ -816,7 +957,7 @@ body {
 
         <div class="feature">
 
-            <div class="icon">
+            <div class="feature-icon">
                 🔄
             </div>
 
@@ -825,8 +966,8 @@ body {
             </h3>
 
             <p>
-                Новые возможности и улучшения
-                интерфейса со временем.
+                Проект развивается,
+                а новые возможности появляются постепенно.
             </p>
 
         </div>
@@ -834,7 +975,7 @@ body {
 
         <div class="feature">
 
-            <div class="icon">
+            <div class="feature-icon">
                 🚀
             </div>
 
@@ -843,8 +984,26 @@ body {
             </h3>
 
             <p>
-                Всё самое важное доступно
-                в несколько кликов.
+                Простая навигация и доступ
+                к основным функциям в несколько кликов.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <h3>
+                Система аккаунтов
+            </h3>
+
+            <p>
+                Регистрация, вход и
+                персональный личный кабинет.
             </p>
 
         </div>
@@ -856,23 +1015,110 @@ body {
 
 
 <!-- =========================
-     INFO
+     CLIENT
+========================= -->
+
+<section
+    class="section"
+    id="client"
+>
+
+    <div class="client-block">
+
+        <h2>
+            Один клиент —
+            <span>много возможностей</span>
+        </h2>
+
+
+        <p>
+
+            Скачай актуальную версию клиента
+            и следи за обновлениями проекта.
+
+        </p>
+
+
+        <!--
+            ЗАМЕНИ # НА ССЫЛКУ НА СКАЧИВАНИЕ,
+            КОГДА ОНА БУДЕТ ГОТОВА.
+        -->
+
+        <a
+            href="#"
+            class="download-button"
+            onclick="alert('Ссылка на скачивание пока не добавлена.'); return false;"
+        >
+            Скачать клиент
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DEVELOPMENT
 ========================= -->
 
 <section class="section">
 
-    <div class="info">
+    <div class="development">
+
+
+        <div class="development-text">
+
+            <h2>
+                Клиент активно развивается
+            </h2>
+
+            <p>
+                Мы постоянно работаем над проектом,
+                улучшаем интерфейс и добавляем новые
+                возможности.
+            </p>
+
+        </div>
+
+
+        <div class="development-badge">
+
+            ACTIVE DEVELOPMENT
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+    <div class="cta-box">
 
         <h2>
-            Добро пожаловать в PornClient
+            Готов попробовать?
         </h2>
 
+
         <p>
-            Создай аккаунт, войди в личный кабинет
-            и управляй своим профилем. Здесь позже
-            можно добавить загрузки, информацию
-            о подписке и другие функции проекта.
+            Создай аккаунт и получи доступ
+            к своему личному кабинету.
         </p>
+
+
+        <a
+            href="login.html"
+            class="cta-button"
+            id="ctaButton"
+        >
+            Создать аккаунт
+        </a>
 
     </div>
 
@@ -913,7 +1159,7 @@ const supabaseClient =
 
 
 /* =========================
-   КНОПКА АККАУНТА
+   ПРОВЕРКА АККАУНТА
 ========================= */
 
 async function updateAccountButtons() {
@@ -935,6 +1181,11 @@ async function updateAccountButtons() {
             "heroAccountButton"
         );
 
+    const ctaButton =
+        document.getElementById(
+            "ctaButton"
+        );
+
 
     if (error) {
 
@@ -945,7 +1196,7 @@ async function updateAccountButtons() {
 
 
     /*
-       Пользователь вошёл
+       ПОЛЬЗОВАТЕЛЬ ВОШЁЛ
     */
 
     if (data.user) {
@@ -964,8 +1215,15 @@ async function updateAccountButtons() {
             "account.html";
 
 
+        ctaButton.textContent =
+            "Личный кабинет";
+
+        ctaButton.href =
+            "account.html";
+
+
     /*
-       Пользователь не вошёл
+       ПОЛЬЗОВАТЕЛЬ НЕ ВОШЁЛ
     */
 
     } else {
@@ -982,14 +1240,17 @@ async function updateAccountButtons() {
 
         heroAccountButton.href =
             "login.html";
+
+
+        ctaButton.textContent =
+            "Создать аккаунт";
+
+        ctaButton.href =
+            "login.html";
     }
 
 }
 
-
-/* =========================
-   ЗАПУСК
-========================= */
 
 updateAccountButtons();
 
