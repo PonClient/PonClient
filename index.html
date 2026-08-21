@@ -793,24 +793,24 @@ a {
 
 
 /* =========================================================
-   STATS
+   VERSION
 ========================================================= */
 
 .stats {
     display:
-        grid;
+        flex;
 
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:
-        15px;
+    justify-content:
+        center;
 
     margin-top:
         60px;
 }
 
 .stat {
+    width:
+        240px;
+
     padding:
         30px;
 
@@ -825,6 +825,17 @@ a {
 
     border-radius:
         18px;
+
+    transition:
+        .25s;
+}
+
+.stat:hover {
+    border-color:
+        rgba(255,122,0,.4);
+
+    transform:
+        translateY(-3px);
 }
 
 .stat-number {
@@ -836,6 +847,10 @@ a {
 
     color:
         #ff7a00;
+
+    text-shadow:
+        0 0 25px
+        rgba(255,122,0,.25);
 }
 
 .stat-label {
@@ -1203,11 +1218,6 @@ a {
             repeat(2,1fr);
     }
 
-    .stats {
-        grid-template-columns:
-            1fr;
-    }
-
 }
 
 @media (max-width: 550px) {
@@ -1284,6 +1294,11 @@ a {
             45px 20px;
     }
 
+    .stat {
+        width:
+            220px;
+    }
+
 }
 
 </style>
@@ -1297,10 +1312,15 @@ a {
      LOADING
 ========================================================= -->
 
-<div class="loading-screen" id="loadingScreen">
+<div
+    class="loading-screen"
+    id="loadingScreen"
+>
 
     <div class="loading-logo">
+
         <span>P</span><span>C</span>
+
     </div>
 
 </div>
@@ -1312,9 +1332,13 @@ a {
 
 <header class="navbar">
 
-    <a href="index.html" class="logo">
+    <a
+        href="index.html"
+        class="logo"
+    >
         Porn<span>Client</span>
     </a>
+
 
     <nav class="nav-links">
 
@@ -1336,6 +1360,7 @@ a {
 
     </nav>
 
+
     <a
         href="login.html"
         class="account-button"
@@ -1355,6 +1380,7 @@ a {
 
     <div class="hero-content">
 
+
         <div class="status-badge">
 
             <span class="status-dot"></span>
@@ -1365,12 +1391,18 @@ a {
 
 
         <h1>
-            Porn<span class="orange">Client</span>
+
+            Porn<span class="orange">
+                Client
+            </span>
+
         </h1>
 
 
         <div class="hero-subtitle">
+
             Minecraft Client нового уровня
+
         </div>
 
 
@@ -1408,26 +1440,46 @@ a {
         <div class="client-info">
 
             <div class="info-item">
+
                 Версия:
-                <strong>2.4.1</strong>
+                <strong>
+                    2.4.1
+                </strong>
+
             </div>
 
+
             <div class="info-item">
+
                 Minecraft:
-                <strong>1.21.1</strong>
+                <strong>
+                    1.21.1
+                </strong>
+
             </div>
 
+
             <div class="info-item">
+
                 Loader:
-                <strong>Fabric</strong>
+                <strong>
+                    Fabric
+                </strong>
+
             </div>
 
+
             <div class="info-item">
+
                 Status:
-                <strong class="orange">Online</strong>
+                <strong class="orange">
+                    Online
+                </strong>
+
             </div>
 
         </div>
+
 
     </div>
 
@@ -1445,9 +1497,13 @@ a {
 
 <div class="container">
 
+
     <h2 class="section-title">
+
         Возможности клиента
+
     </h2>
+
 
     <p class="section-description">
 
@@ -1571,35 +1627,9 @@ a {
     </div>
 
 
-    <!-- STATS -->
+    <!-- ONLY CURRENT VERSION -->
 
     <div class="stats">
-
-        <div class="stat">
-
-            <div class="stat-number">
-                12K+
-            </div>
-
-            <div class="stat-label">
-                Пользователей
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-number">
-                38K+
-            </div>
-
-            <div class="stat-label">
-                Загрузок
-            </div>
-
-        </div>
-
 
         <div class="stat">
 
@@ -1614,6 +1644,7 @@ a {
         </div>
 
     </div>
+
 
 </div>
 
@@ -1633,12 +1664,17 @@ a {
 
     <div class="download-box">
 
+
         <h2>
+
             Скачать
+
             <span class="orange">
                 PornClient
             </span>
+
         </h2>
+
 
         <p>
 
@@ -1647,8 +1683,6 @@ a {
 
         </p>
 
-
-        <!-- ЗАМЕНИ # НА ССЫЛКУ НА ФАЙЛ -->
 
         <a
             href="#"
@@ -1660,8 +1694,11 @@ a {
                 return false;
             "
         >
+
             ↓ Скачать v2.4.1
+
         </a>
+
 
     </div>
 
@@ -1681,12 +1718,16 @@ a {
 
 <div class="container">
 
+
     <h2 class="section-title">
         Обновления
     </h2>
 
+
     <p class="section-description">
+
         Последние изменения клиента.
+
     </p>
 
 
@@ -1777,18 +1818,25 @@ a {
 
 <div class="container">
 
+
     <div class="discord">
+
 
         <div class="discord-icon">
             💬
         </div>
 
+
         <h2>
+
             Присоединяйся к
+
             <span class="orange">
                 сообществу
             </span>
+
         </h2>
+
 
         <p>
 
@@ -1798,8 +1846,6 @@ a {
 
         </p>
 
-
-        <!-- ЗАМЕНИ # НА ССЫЛКУ DISCORD -->
 
         <a
             href="#"
@@ -1811,8 +1857,11 @@ a {
                 return false;
             "
         >
+
             Открыть Discord
+
         </a>
+
 
     </div>
 
@@ -1832,9 +1881,11 @@ a {
 
 <div class="container">
 
+
     <h2 class="section-title">
         FAQ
     </h2>
+
 
     <p class="section-description">
         Часто задаваемые вопросы.
@@ -1851,8 +1902,10 @@ a {
             </summary>
 
             <p>
+
                 На данный момент клиент рассчитан
                 на Minecraft 1.21.1.
+
             </p>
 
         </details>
@@ -1865,8 +1918,10 @@ a {
             </summary>
 
             <p>
+
                 Перейди в раздел скачивания
                 и нажми кнопку загрузки.
+
             </p>
 
         </details>
@@ -1879,9 +1934,11 @@ a {
             </summary>
 
             <p>
+
                 Некоторые функции клиента
                 могут требовать авторизации
                 через личный кабинет.
+
             </p>
 
         </details>
@@ -1894,9 +1951,11 @@ a {
             </summary>
 
             <p>
+
                 Все основные изменения
                 публикуются в разделе обновлений
                 и в сообществе проекта.
+
             </p>
 
         </details>
@@ -1916,7 +1975,11 @@ a {
 <footer class="footer">
 
     © 2026
-    <span>PornClient</span>.
+
+    <span>
+        PornClient
+    </span>.
+
     Все права защищены.
 
 </footer>
@@ -1960,6 +2023,7 @@ async function updateAccountButtons() {
             "accountButton"
         );
 
+
     const heroAccountButton =
         document.getElementById(
             "heroAccountButton"
@@ -1989,8 +2053,9 @@ async function updateAccountButtons() {
         heroAccountButton.href =
             "account.html";
 
+    }
 
-    } else {
+    else {
 
         accountButton.textContent =
             "Войти";
@@ -2014,7 +2079,7 @@ updateAccountButtons();
 
 
 /* =========================================================
-   LOADING
+   LOADING SCREEN
 ========================================================= */
 
 window.addEventListener(
