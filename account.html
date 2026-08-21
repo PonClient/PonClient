@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PornClient — Личный кабинет</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #fff;
+
+    background:
+        radial-gradient(
+            circle at 85% 0%,
+            rgba(255,122,0,.16),
+            transparent 35%
+        ),
+        #070707;
+}
+
+/* NAVBAR */
+
+.navbar {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(7,7,7,.85);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid #202020;
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #ff7a00;
+
+    text-shadow:
+        0 0 20px rgba(255,122,0,.5);
+}
+
+.logout {
+    padding: 10px 17px;
+
+    border: 1px solid #292929;
+    border-radius: 9px;
+
+    background: #111;
+    color: #aaa;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.logout:hover {
+    border-color: #ff7a00;
+    color: #ff7a00;
+}
+
+
+/* CONTENT */
+
+.container {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 70px 20px;
+}
+
+.header {
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: clamp(38px, 6vw, 58px);
+
+    letter-spacing: -2px;
+}
+
+.header p {
+    margin-top: 10px;
+    color: #888;
+}
+
+
+/* CARDS */
+
+.account {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    padding: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #141414,
+            #0d0d0d
+        );
+
+    border: 1px solid #252525;
+
+    border-radius: 18px;
+
+    transition: .2s;
+}
+
+.card:hover {
+    border-color:
+        rgba(255,122,0,.5);
+
+    transform:
+        translateY(-3px);
+}
+
+.card-title {
+    color: #888;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.card-value {
+    font-size: 18px;
+
+    font-weight: 700;
+
+    word-break: break-word;
+}
+
+.orange {
+    color: #ff7a00;
+}
+
+
+/* STATUS */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,122,0,.08);
+
+    border:
+        1px solid
+        rgba(255,122,0,.25);
+
+    color: #ff9635;
+
+    font-size: 13px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff7a00;
+
+    box-shadow:
+        0 0 10px #ff7a00;
+}
+
+
+/* SUBSCRIPTION */
+
+.subscription-active {
+    color: #ff7a00;
+}
+
+.subscription-free {
+    color: #888;
+}
+
+
+/* WELCOME */
+
+.welcome {
+    margin-top: 18px;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(255,122,0,.14),
+            transparent 40%
+        ),
+        #101010;
+
+    border: 1px solid #252525;
+}
+
+.welcome h2 {
+    font-size: 28px;
+}
+
+.welcome p {
+    margin-top: 10px;
+
+    color: #888;
+
+    line-height: 1.7;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .account {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 50px 20px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        Porn<span>Client</span>
+    </a>
+
+    <button
+        class="logout"
+        id="logout"
+    >
+        Выйти
+    </button>
+
+</header>
+
+
+<main class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Личный кабинет
+        </h1>
+
+        <p>
+            Управление твоим аккаунтом PornClient
+        </p>
+
+    </div>
+
+
+    <section class="account">
+
+
+        <!-- EMAIL -->
+
+        <div class="card">
+
+            <div class="card-title">
+                EMAIL
+            </div>
+
+            <div
+                class="card-value"
+                id="email"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="card">
+
+            <div class="card-title">
+                СТАТУС
+            </div>
+
+            <div class="card-value">
+
+                <span class="status">
+
+                    <span class="dot"></span>
+
+                    Аккаунт подтверждён
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div class="card">
+
+            <div class="card-title">
+                ДАТА РЕГИСТРАЦИИ
+            </div>
+
+            <div
+                class="card-value"
+                id="created"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+        <!-- ID -->
+
+        <div class="card">
+
+            <div class="card-title">
+                ID АККАУНТА
+            </div>
+
+            <div
+                class="card-value orange"
+                id="userId"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+        <!-- SUBSCRIPTION -->
+
+        <div class="card">
+
+            <div class="card-title">
+                ПОДПИСКА
+            </div>
+
+            <div
+                class="card-value"
+                id="subscriptionPlan"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+        <!-- EXPIRATION -->
+
+        <div class="card">
+
+            <div class="card-title">
+                ПОДПИСКА ДО
+            </div>
+
+            <div
+                class="card-value"
+                id="subscriptionExpires"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+        <!-- DAYS -->
+
+        <div class="card">
+
+            <div class="card-title">
+                ОСТАЛОСЬ ДНЕЙ
+            </div>
+
+            <div
+                class="card-value orange"
+                id="subscriptionDays"
+            >
+                Загрузка...
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="welcome">
+
+        <h2>
+            Добро пожаловать в PornClient 👋
+        </h2>
+
+        <p>
+            Здесь отображается информация
+            о твоём аккаунте и подписке.
+            В дальнейшем здесь можно добавить
+            загрузки клиента, покупки, настройки
+            профиля и другие функции.
+        </p>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://oqswqzfjpupiglxxspdt.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_X6zOmQu9VGifel5RtBbFmg_ZsgDJ2eg";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ЗАГРУЗКА АККАУНТА
+========================= */
+
+async function loadAccount() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    /* Если пользователь не вошёл */
+
+    if (error || !data.user) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+
+    const user =
+        data.user;
+
+
+    /* =========================
+       EMAIL
+    ========================= */
+
+    document.getElementById(
+        "email"
+    ).textContent =
+        user.email || "Не указан";
+
+
+    /* =========================
+       USER ID
+    ========================= */
+
+    document.getElementById(
+        "userId"
+    ).textContent =
+        user.id;
+
+
+    /* =========================
+       ДАТА РЕГИСТРАЦИИ
+    ========================= */
+
+    if (user.created_at) {
+
+        const date =
+            new Date(
+                user.created_at
+            );
+
+        document.getElementById(
+            "created"
+        ).textContent =
+            date.toLocaleDateString(
+                "ru-RU",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+    }
+
+
+    /* =========================
+       ПРОФИЛЬ
+    ========================= */
+
+    const {
+        data: profile,
+        error: profileError
+    } =
+        await supabaseClient
+            .from("profiles")
+            .select(
+                "subscription_plan, subscription_expires_at"
+            )
+            .eq("id", user.id)
+            .maybeSingle();
+
+
+    const planElement =
+        document.getElementById(
+            "subscriptionPlan"
+        );
+
+    const expiresElement =
+        document.getElementById(
+            "subscriptionExpires"
+        );
+
+    const daysElement =
+        document.getElementById(
+            "subscriptionDays"
+        );
+
+
+    /* =========================
+       ОШИБКА
+    ========================= */
+
+    if (profileError) {
+
+        console.error(
+            profileError
+        );
+
+        planElement.textContent =
+            "Ошибка";
+
+        expiresElement.textContent =
+            "—";
+
+        daysElement.textContent =
+            "—";
+
+        return;
+    }
+
+
+    /* =========================
+       ПРОФИЛЬ НЕ СОЗДАН
+    ========================= */
+
+    if (!profile) {
+
+        planElement.textContent =
+            "Free";
+
+        planElement.className =
+            "card-value subscription-free";
+
+        expiresElement.textContent =
+            "Не активна";
+
+        daysElement.textContent =
+            "0";
+
+        return;
+    }
+
+
+    /* =========================
+       ТАРИФ
+    ========================= */
+
+    const plan =
+        profile.subscription_plan ||
+        "Free";
+
+
+    planElement.textContent =
+        plan;
+
+
+    /* =========================
+       ПОДПИСКА
+    ========================= */
+
+    if (
+        profile.subscription_expires_at
+    ) {
+
+        const expires =
+            new Date(
+                profile.subscription_expires_at
+            );
+
+
+        const now =
+            new Date();
+
+
+        /* Дата */
+
+        expiresElement.textContent =
+            expires.toLocaleDateString(
+                "ru-RU",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+
+
+        /* Разница */
+
+        const difference =
+            expires.getTime() -
+            now.getTime();
+
+
+        const days =
+            Math.max(
+                0,
+                Math.ceil(
+                    difference /
+                    (1000 * 60 * 60 * 24)
+                )
+            );
+
+
+        daysElement.textContent =
+            days;
+
+
+        /* Проверяем активность */
+
+        if (
+            expires > now &&
+            plan !== "Free"
+        ) {
+
+            planElement.className =
+                "card-value subscription-active";
+
+        } else {
+
+            planElement.className =
+                "card-value subscription-free";
+
+            daysElement.textContent =
+                "0";
+        }
+
+    } else {
+
+        expiresElement.textContent =
+            "Не активна";
+
+        daysElement.textContent =
+            "0";
+
+        planElement.className =
+            "card-value subscription-free";
+    }
+
+}
+
+
+/* =========================
+   ВЫХОД
+========================= */
+
+document
+    .getElementById("logout")
+    .addEventListener(
+        "click",
+        async () => {
+
+            await supabaseClient
+                .auth
+                .signOut();
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+/* =========================
+   ЗАПУСК
+========================= */
+
+loadAccount();
+
+</script>
+
+</body>
+</html>
