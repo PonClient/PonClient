@@ -48,11 +48,6 @@ body {
         #070707;
 }
 
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
 a {
     color: inherit;
 }
@@ -71,6 +66,102 @@ a {
 
 
 /* =========================================================
+   NEON MOUSE CURSOR
+========================================================= */
+
+* {
+    cursor: none;
+}
+
+.cursor-dot {
+    position: fixed;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ff7a00;
+
+    pointer-events: none;
+
+    z-index: 999999;
+
+    transform:
+        translate(-50%, -50%);
+
+    box-shadow:
+        0 0 10px #ff7a00,
+        0 0 25px #ff7a00,
+        0 0 45px rgba(255,122,0,.7);
+}
+
+
+/* Неоновая полоска */
+
+.cursor-trail {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 180px;
+    height: 7px;
+
+    pointer-events: none;
+
+    z-index: 999998;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,122,0,.12),
+            rgba(255,122,0,.45),
+            #ff7a00
+        );
+
+    filter:
+        blur(2px);
+
+    transform-origin:
+        right center;
+
+    opacity: .9;
+
+    box-shadow:
+        0 0 12px rgba(255,122,0,.7),
+        0 0 30px rgba(255,122,0,.35);
+
+    transition:
+        opacity .2s ease;
+}
+
+.cursor-trail::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,122,0,.2),
+            #ff7a00
+        );
+
+    filter:
+        blur(5px);
+}
+
+
+/* =========================================================
    LOADING SCREEN
 ========================================================= */
 
@@ -81,6 +172,7 @@ a {
     z-index: 99999;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -93,7 +185,9 @@ a {
 
 .loading-screen.hide {
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 }
 
@@ -114,7 +208,8 @@ a {
             transparent 70%
         );
 
-    filter: blur(35px);
+    filter:
+        blur(35px);
 
     animation:
         loadingGlow 1.5s ease forwards;
@@ -135,11 +230,13 @@ a {
 
     font-weight: 950;
 
-    letter-spacing: -14px;
+    letter-spacing:
+        -14px;
 
     opacity: 0;
 
-    transform: scale(.6);
+    transform:
+        scale(.6);
 
     text-shadow:
         0 0 15px rgba(255,122,0,.9),
@@ -159,43 +256,59 @@ a {
 
     0% {
         opacity: 0;
-        transform: scale(.6);
-        filter: blur(12px);
+
+        transform:
+            scale(.6);
+
+        filter:
+            blur(12px);
     }
 
     60% {
         opacity: 1;
-        transform: scale(1.08);
-        filter: blur(0);
+
+        transform:
+            scale(1.08);
+
+        filter:
+            blur(0);
     }
 
     100% {
         opacity: 1;
-        transform: scale(1);
-    }
 
+        transform:
+            scale(1);
+    }
 }
 
 @keyframes logoOut {
 
     0% {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
     100% {
         opacity: 0;
-        transform: scale(1.25);
-        filter: blur(8px);
-    }
 
+        transform:
+            scale(1.25);
+
+        filter:
+            blur(8px);
+    }
 }
 
 @keyframes loadingGlow {
 
     0% {
         opacity: 0;
-        transform: scale(.5);
+
+        transform:
+            scale(.5);
     }
 
     40% {
@@ -204,9 +317,10 @@ a {
 
     100% {
         opacity: 0;
-        transform: scale(1.4);
-    }
 
+        transform:
+            scale(1.4);
+    }
 }
 
 
@@ -216,6 +330,7 @@ a {
 
 .navbar {
     position: sticky;
+
     top: 0;
 
     z-index: 1000;
@@ -223,7 +338,9 @@ a {
     height: 72px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding: 0 7%;
@@ -436,14 +553,13 @@ a {
 
 @keyframes pulse {
 
-    0%,100% {
+    0%, 100% {
         opacity: 1;
     }
 
     50% {
         opacity: .4;
     }
-
 }
 
 .hero h1 {
@@ -620,7 +736,7 @@ a {
 
 
 /* =========================================================
-   SECTION
+   SECTIONS
 ========================================================= */
 
 .section {
@@ -793,7 +909,7 @@ a {
 
 
 /* =========================================================
-   VERSION
+   CURRENT VERSION
 ========================================================= */
 
 .stats {
@@ -1075,7 +1191,7 @@ a {
 
 .faq summary {
     cursor:
-        pointer;
+        none;
 
     font-weight:
         800;
@@ -1220,6 +1336,7 @@ a {
 
 }
 
+
 @media (max-width: 550px) {
 
     .container {
@@ -1301,6 +1418,25 @@ a {
 
 }
 
+
+/* =========================================================
+   MOBILE CURSOR OFF
+========================================================= */
+
+@media (hover: none), (pointer: coarse) {
+
+    * {
+        cursor: auto;
+    }
+
+    .cursor-dot,
+    .cursor-trail {
+        display:
+            none;
+    }
+
+}
+
 </style>
 </head>
 
@@ -1309,7 +1445,22 @@ a {
 
 
 <!-- =========================================================
-     LOADING
+     CUSTOM CURSOR
+========================================================= -->
+
+<div
+    class="cursor-dot"
+    id="cursorDot"
+></div>
+
+<div
+    class="cursor-trail"
+    id="cursorTrail"
+></div>
+
+
+<!-- =========================================================
+     LOADING SCREEN
 ========================================================= -->
 
 <div
@@ -1319,7 +1470,8 @@ a {
 
     <div class="loading-logo">
 
-        <span>P</span><span>C</span>
+        <span>P</span>
+        <span>C</span>
 
     </div>
 
@@ -1627,7 +1779,7 @@ a {
     </div>
 
 
-    <!-- ONLY CURRENT VERSION -->
+    <!-- ТОЛЬКО ТЕКУЩАЯ ВЕРСИЯ -->
 
     <div class="stats">
 
@@ -1986,10 +2138,14 @@ a {
 
 
 <!-- =========================================================
-     SUPABASE
+     JAVASCRIPT
 ========================================================= -->
 
 <script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
     "https://oqswqzfjpupiglxxspdt.supabase.co";
@@ -2006,7 +2162,7 @@ const supabaseClient =
 
 
 /* =========================================================
-   ACCOUNT
+   ACCOUNT BUTTONS
 ========================================================= */
 
 async function updateAccountButtons() {
@@ -2105,6 +2261,122 @@ window.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   NEON MOUSE TRAIL
+========================================================= */
+
+const cursorDot =
+    document.getElementById(
+        "cursorDot"
+    );
+
+const cursorTrail =
+    document.getElementById(
+        "cursorTrail"
+    );
+
+
+let mouseX = 0;
+let mouseY = 0;
+
+let trailX = 0;
+let trailY = 0;
+
+
+/* Получаем позицию мыши */
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        mouseX =
+            event.clientX;
+
+        mouseY =
+            event.clientY;
+
+
+        /* Главная точка */
+
+        cursorDot.style.left =
+            mouseX + "px";
+
+        cursorDot.style.top =
+            mouseY + "px";
+
+    }
+);
+
+
+/* Плавное движение шлейфа */
+
+function animateTrail() {
+
+    trailX +=
+        (mouseX - trailX) * 0.12;
+
+    trailY +=
+        (mouseY - trailY) * 0.12;
+
+
+    const dx =
+        mouseX - trailX;
+
+    const dy =
+        mouseY - trailY;
+
+
+    const distance =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
+
+
+    const angle =
+        Math.atan2(
+            dy,
+            dx
+        ) * 180 / Math.PI;
+
+
+    cursorTrail.style.left =
+        trailX + "px";
+
+    cursorTrail.style.top =
+        trailY + "px";
+
+
+    /*
+       Чем быстрее мышь движется,
+       тем длиннее становится полоска.
+    */
+
+    const stretch =
+        Math.min(
+            1 + distance / 55,
+            3
+        );
+
+
+    cursorTrail.style.transform =
+        `
+        translate(-100%, -50%)
+        rotate(${angle}deg)
+        scaleX(${stretch})
+        `;
+
+
+    requestAnimationFrame(
+        animateTrail
+    );
+
+}
+
+
+animateTrail();
 
 </script>
 
