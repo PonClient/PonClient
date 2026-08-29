@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -24,7 +23,7 @@ body {
     background:
         radial-gradient(
             circle at 85% 0%,
-            rgba(255,122,0,.16),
+            rgba(143,216,255,.16),
             transparent 35%
         ),
         #070707;
@@ -54,10 +53,10 @@ body {
 }
 
 .logo span {
-    color: #ff7a00;
+    color: #8fd8ff;
 
     text-shadow:
-        0 0 20px rgba(255,122,0,.5);
+        0 0 20px rgba(143,216,255,.5);
 }
 
 .logout {
@@ -74,8 +73,8 @@ body {
 }
 
 .logout:hover {
-    border-color: #ff7a00;
-    color: #ff7a00;
+    border-color: #8fd8ff;
+    color: #8fd8ff;
 }
 
 .container {
@@ -129,7 +128,7 @@ body {
 
 .card:hover {
     border-color:
-        rgba(255,122,0,.5);
+        rgba(143,216,255,.5);
 
     transform:
         translateY(-3px);
@@ -152,7 +151,7 @@ body {
 }
 
 .orange {
-    color: #ff7a00;
+    color: #8fd8ff;
 }
 
 .status {
@@ -167,13 +166,13 @@ body {
     border-radius: 999px;
 
     background:
-        rgba(255,122,0,.08);
+        rgba(143,216,255,.08);
 
     border:
         1px solid
-        rgba(255,122,0,.25);
+        rgba(143,216,255,.25);
 
-    color: #ff9635;
+    color: #b9e9ff;
 
     font-size: 13px;
 }
@@ -184,14 +183,14 @@ body {
 
     border-radius: 50%;
 
-    background: #ff7a00;
+    background: #8fd8ff;
 
     box-shadow:
-        0 0 10px #ff7a00;
+        0 0 10px #8fd8ff;
 }
 
 .subscription-active {
-    color: #ff7a00;
+    color: #8fd8ff;
 }
 
 .subscription-free {
@@ -208,7 +207,7 @@ body {
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(255,122,0,.14),
+            rgba(143,216,255,.14),
             transparent 40%
         ),
         #101010;
@@ -250,7 +249,6 @@ body {
 
 <header class="navbar">
 
-```
 <a
     href="index.html"
     class="logo"
@@ -264,13 +262,11 @@ body {
 >
     Выйти
 </button>
-```
 
 </header>
 
 <main class="container">
 
-```
 <div class="header">
 
     <h1>
@@ -412,7 +408,6 @@ body {
     </p>
 
 </section>
-```
 
 </main>
 
@@ -557,11 +552,6 @@ async function loadAccount() {
         profile.subscription_plan ||
         "Free";
 
-
-    /*
-       Free в базе =
-       Не активна на сайте
-    */
 
     if (plan === "Free") {
 
