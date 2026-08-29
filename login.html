@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,7 +29,7 @@ body {
     background:
         radial-gradient(
             circle at top right,
-            rgba(255,122,0,.18),
+            rgba(143,211,255,.18),
             transparent 35%
         ),
         #070707;
@@ -53,7 +54,8 @@ body {
 }
 
 .logo span {
-    color: #ff7a00;
+    color: #8fd3ff;
+    text-shadow: 0 0 20px rgba(143,211,255,.35);
 }
 
 .subtitle {
@@ -74,10 +76,13 @@ input {
     border-radius: 10px;
 
     outline: none;
+
+    transition: .2s;
 }
 
 input:focus {
-    border-color: #ff7a00;
+    border-color: #8fd3ff;
+    box-shadow: 0 0 0 2px rgba(143,211,255,.08);
 }
 
 label {
@@ -96,7 +101,7 @@ button {
     border: 0;
     border-radius: 10px;
 
-    background: #ff7a00;
+    background: #8fd3ff;
     color: #050505;
 
     font-weight: 800;
@@ -106,8 +111,12 @@ button {
 }
 
 button:hover {
-    background: #ff9635;
+    background: #b8e5ff;
     transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(143,211,255,.2);
 }
 
 .switch {
@@ -119,8 +128,14 @@ button:hover {
 }
 
 .switch a {
-    color: #ff7a00;
+    color: #8fd3ff;
     cursor: pointer;
+
+    transition: .2s;
+}
+
+.switch a:hover {
+    color: #b8e5ff;
 }
 
 .message {
@@ -129,66 +144,64 @@ button:hover {
 
     text-align: center;
     font-size: 14px;
-    color: #ff9635;
+    color: #8fd3ff;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
 <div class="box">
 
-```
-<div class="logo">
-    Pon<span>client</span>
-</div>
+    <div class="logo">
+        Pon<span>client</span>
+    </div>
 
-<div class="subtitle" id="title">
-    Вход в аккаунт
-</div>
+    <div class="subtitle" id="title">
+        Вход в аккаунт
+    </div>
 
-<form id="authForm">
+    <form id="authForm">
 
-    <label>Email</label>
+        <label>Email</label>
 
-    <input
-        id="email"
-        type="email"
-        placeholder="example@mail.com"
-        required
-    >
+        <input
+            id="email"
+            type="email"
+            placeholder="example@mail.com"
+            required
+        >
 
-    <label>Пароль</label>
+        <label>Пароль</label>
 
-    <input
-        id="password"
-        type="password"
-        placeholder="Введите пароль"
-        minlength="6"
-        required
-    >
+        <input
+            id="password"
+            type="password"
+            placeholder="Введите пароль"
+            minlength="6"
+            required
+        >
 
-    <button type="submit" id="submitButton">
-        Войти
-    </button>
+        <button type="submit" id="submitButton">
+            Войти
+        </button>
 
-</form>
+    </form>
 
-<div class="switch">
+    <div class="switch">
 
-    <span id="switchText">
-        Нет аккаунта?
-    </span>
+        <span id="switchText">
+            Нет аккаунта?
+        </span>
 
-    <a id="switchMode">
-        Зарегистрироваться
-    </a>
+        <a id="switchMode">
+            Зарегистрироваться
+        </a>
 
-</div>
+    </div>
 
-<div class="message" id="message"></div>
-```
+    <div class="message" id="message"></div>
 
 </div>
 
@@ -369,3 +382,4 @@ form.addEventListener("submit", async (event) => {
 
 </body>
 </html>
+```
