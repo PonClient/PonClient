@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PornClient — Личный кабинет</title>
+<title>Ponclient — Личный кабинет</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -249,165 +250,169 @@ body {
 
 <header class="navbar">
 
-    <a
-        href="index.html"
-        class="logo"
-    >
-        Porn<span>Client</span>
-    </a>
+```
+<a
+    href="index.html"
+    class="logo"
+>
+    Pon<span>client</span>
+</a>
 
-    <button
-        class="logout"
-        id="logout"
-    >
-        Выйти
-    </button>
+<button
+    class="logout"
+    id="logout"
+>
+    Выйти
+</button>
+```
 
 </header>
 
 <main class="container">
 
-    <div class="header">
+```
+<div class="header">
 
-        <h1>
-            Личный кабинет
-        </h1>
+    <h1>
+        Личный кабинет
+    </h1>
 
-        <p>
-            Управление твоим аккаунтом PornClient
-        </p>
+    <p>
+        Управление твоим аккаунтом Ponclient
+    </p>
+
+</div>
+
+<section class="account">
+
+    <div class="card">
+
+        <div class="card-title">
+            EMAIL
+        </div>
+
+        <div
+            class="card-value"
+            id="email"
+        >
+            Загрузка...
+        </div>
 
     </div>
 
-    <section class="account">
+    <div class="card">
 
-        <div class="card">
+        <div class="card-title">
+            СТАТУС
+        </div>
 
-            <div class="card-title">
-                EMAIL
-            </div>
+        <div class="card-value">
 
-            <div
-                class="card-value"
-                id="email"
-            >
-                Загрузка...
-            </div>
+            <span class="status">
+
+                <span class="dot"></span>
+
+                Аккаунт подтверждён
+
+            </span>
 
         </div>
 
-        <div class="card">
+    </div>
 
-            <div class="card-title">
-                СТАТУС
-            </div>
+    <div class="card">
 
-            <div class="card-value">
-
-                <span class="status">
-
-                    <span class="dot"></span>
-
-                    Аккаунт подтверждён
-
-                </span>
-
-            </div>
-
+        <div class="card-title">
+            ДАТА РЕГИСТРАЦИИ
         </div>
 
-        <div class="card">
-
-            <div class="card-title">
-                ДАТА РЕГИСТРАЦИИ
-            </div>
-
-            <div
-                class="card-value"
-                id="created"
-            >
-                Загрузка...
-            </div>
-
+        <div
+            class="card-value"
+            id="created"
+        >
+            Загрузка...
         </div>
 
-        <div class="card">
+    </div>
 
-            <div class="card-title">
-                ID АККАУНТА
-            </div>
+    <div class="card">
 
-            <div
-                class="card-value orange"
-                id="userId"
-            >
-                Загрузка...
-            </div>
-
+        <div class="card-title">
+            ID АККАУНТА
         </div>
 
-        <div class="card">
-
-            <div class="card-title">
-                ПОДПИСКА
-            </div>
-
-            <div
-                class="card-value"
-                id="subscriptionPlan"
-            >
-                Загрузка...
-            </div>
-
+        <div
+            class="card-value orange"
+            id="userId"
+        >
+            Загрузка...
         </div>
 
-        <div class="card">
+    </div>
 
-            <div class="card-title">
-                ПОДПИСКА ДО
-            </div>
+    <div class="card">
 
-            <div
-                class="card-value"
-                id="subscriptionExpires"
-            >
-                Загрузка...
-            </div>
-
+        <div class="card-title">
+            ПОДПИСКА
         </div>
 
-        <div class="card">
-
-            <div class="card-title">
-                ОСТАЛОСЬ ДНЕЙ
-            </div>
-
-            <div
-                class="card-value orange"
-                id="subscriptionDays"
-            >
-                Загрузка...
-            </div>
-
+        <div
+            class="card-value"
+            id="subscriptionPlan"
+        >
+            Загрузка...
         </div>
 
-    </section>
+    </div>
 
-    <section class="welcome">
+    <div class="card">
 
-        <h2>
-            Добро пожаловать в PornClient 👋
-        </h2>
+        <div class="card-title">
+            ПОДПИСКА ДО
+        </div>
 
-        <p>
-            Здесь отображается информация
-            о твоём аккаунте и подписке.
-            В дальнейшем здесь можно добавить
-            загрузки клиента, покупки, настройки
-            профиля и другие функции.
-        </p>
+        <div
+            class="card-value"
+            id="subscriptionExpires"
+        >
+            Загрузка...
+        </div>
 
-    </section>
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+            ОСТАЛОСЬ ДНЕЙ
+        </div>
+
+        <div
+            class="card-value orange"
+            id="subscriptionDays"
+        >
+            Загрузка...
+        </div>
+
+    </div>
+
+</section>
+
+<section class="welcome">
+
+    <h2>
+        Добро пожаловать в Ponclient 👋
+    </h2>
+
+    <p>
+        Здесь отображается информация
+        о твоём аккаунте и подписке.
+        В дальнейшем здесь можно добавить
+        загрузки клиента, покупки, настройки
+        профиля и другие функции.
+    </p>
+
+</section>
+```
 
 </main>
 
